@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="qlbn_Covid" Class="CovidDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sql.bsite.net\MSSQL2016;Initial Catalog=qlbn_Covid;Persist Security Info=True;User ID=qlbn_Covid" SettingsObjectName="QLBN_COVID.Properties.Settings" SettingsPropertyName="qlbn_CovidConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Address" Member="Addresses">
+    <Type Name="Address">
+      <Column Name="IDAddress" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDDistrict" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDCity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Address_Patient" Member="Patients" ThisKey="IDAddress" OtherKey="IDAddress" Type="Patient" />
+      <Association Name="Address_Place_Of_Treatment" Member="Place_Of_Treatments" ThisKey="IDAddress" OtherKey="IDAddress" Type="Place_Of_Treatment" />
+      <Association Name="Ward_Address" Member="Ward" ThisKey="IDWard" OtherKey="IDWard" Type="Ward" IsForeignKey="true" />
+      <Association Name="City_Address" Member="City" ThisKey="IDCity" OtherKey="IDCity" Type="City" IsForeignKey="true" />
+      <Association Name="District_Address" Member="District" ThisKey="IDDistrict" OtherKey="IDDistrict" Type="District" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ward" Member="Wards">
+    <Type Name="Ward">
+      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name_of_ward" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Ward_Address" Member="Addresses" ThisKey="IDWard" OtherKey="IDWard" Type="Address" />
+    </Type>
+  </Table>
+  <Table Name="dbo.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="IDCity" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name_of_city" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="City_Address" Member="Addresses" ThisKey="IDCity" OtherKey="IDCity" Type="Address" />
+    </Type>
+  </Table>
+  <Table Name="dbo.District" Member="Districts">
+    <Type Name="District">
+      <Column Name="IDDistrict" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name_of_district" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="District_Address" Member="Addresses" ThisKey="IDDistrict" OtherKey="IDDistrict" Type="Address" />
+    </Type>
+  </Table>
+  <Table Name="dbo.History_Treatment" Member="History_Treatments">
+    <Type Name="History_Treatment">
+      <Column Name="IDBN" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DateStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IDTreatment" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDStatus" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Patient_History_Treatment" Member="Patient" ThisKey="IDBN" OtherKey="CMND" Type="Patient" IsForeignKey="true" />
+      <Association Name="Status_History_Treatment" Member="Status" ThisKey="IDStatus" OtherKey="IDStatus" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient" Member="Patients">
+    <Type Name="Patient">
+      <Column Name="CMND" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="YearOfBirth" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IDAddress" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDTreatment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="People_Involved" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Patient_History_Treatment" Member="History_Treatments" ThisKey="CMND" OtherKey="IDBN" Type="History_Treatment" />
+      <Association Name="Address_Patient" Member="Address" ThisKey="IDAddress" OtherKey="IDAddress" Type="Address" IsForeignKey="true" />
+      <Association Name="Place_Of_Treatment_Patient" Member="Place_Of_Treatment" ThisKey="IDTreatment" OtherKey="ID" Type="Place_Of_Treatment" IsForeignKey="true" />
+      <Association Name="Status_Patient" Member="Status" ThisKey="IDStatus" OtherKey="IDStatus" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Place_Of_Treatment" Member="Place_Of_Treatments">
+    <Type Name="Place_Of_Treatment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDAddress" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Capacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Current_Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Place_Of_Treatment_Patient" Member="Patients" ThisKey="ID" OtherKey="IDTreatment" Type="Patient" />
+      <Association Name="Address_Place_Of_Treatment" Member="Address" ThisKey="IDAddress" OtherKey="IDAddress" Type="Address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="IDStatus" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Kind_Of_Status" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Association Name="Status_History_Treatment" Member="History_Treatments" ThisKey="IDStatus" OtherKey="IDStatus" Type="History_Treatment" />
+      <Association Name="Status_Patient" Member="Patients" ThisKey="IDStatus" OtherKey="IDStatus" Type="Patient" />
+    </Type>
+  </Table>
+  <Table Name="dbo.User_Activities" Member="User_Activities">
+    <Type Name="User_Activity">
+      <Column Name="IDActivity" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Log_User_Activity" Member="User_Log" ThisKey="UserID" OtherKey="ID" Type="User_Log" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.User_Log" Member="User_Logs">
+    <Type Name="User_Log">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Log_User_Activity" Member="User_Activities" ThisKey="ID" OtherKey="UserID" Type="User_Activity" />
+    </Type>
+  </Table>
+</Database>
