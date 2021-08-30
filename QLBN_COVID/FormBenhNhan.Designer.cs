@@ -30,7 +30,7 @@ namespace QLBN_COVID
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBenhNhan));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataPatient = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.lblCMND = new System.Windows.Forms.Label();
             this.txtCMND = new System.Windows.Forms.TextBox();
@@ -55,21 +55,21 @@ namespace QLBN_COVID
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPatient)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataPatient
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataPatient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 300);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(800, 150);
-            this.dataGridView1.TabIndex = 0;
+            this.dataPatient.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPatient.GridColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataPatient.Location = new System.Drawing.Point(0, 300);
+            this.dataPatient.Name = "dataPatient";
+            this.dataPatient.Size = new System.Drawing.Size(800, 150);
+            this.dataPatient.TabIndex = 0;
             // 
             // label2
             // 
@@ -387,10 +387,11 @@ namespace QLBN_COVID
             this.Controls.Add(this.txtCMND);
             this.Controls.Add(this.lblCMND);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataPatient);
             this.Name = "FormBenhNhan";
             this.Text = "FormBenhNhan";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.FormBenhNhan_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataPatient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,7 +399,7 @@ namespace QLBN_COVID
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataPatient;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblCMND;
         private System.Windows.Forms.TextBox txtCMND;
