@@ -63,7 +63,10 @@ namespace QLBN_COVID
         public User_Log user;
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
+            if (FormLogin.user != null)
+            {
+                lblUserLogin.Text = FormLogin.user.FullName;
+            }    
             placeOfTreatmentToolStripMenuItem.Enabled = false;
             userToolStripMenuItem.Enabled = false;
             mdiobj = this;

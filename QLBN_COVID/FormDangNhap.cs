@@ -40,7 +40,7 @@ namespace QLBN_COVID
         }
 
         //private CovidDataContext db;
-        public User_Log user;
+        public static User_Log user;
         private void btnLogin_Click(object sender, EventArgs e)
         {
 
