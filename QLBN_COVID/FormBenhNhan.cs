@@ -58,6 +58,21 @@ namespace QLBN_COVID
                      };
             dataPatient.DataSource = rs;
         }
+        private void dataPatient_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                r =dataPatient.Rows[e.RowIndex];
+                txtCMND.Text = r.Cells["CMND"].Value.ToString();
+                txtFullName.Text = r.Cells["FullName"].Value.ToString();
+                txtYearOfBirth.Text = r.Cells["YearOfBirth"].Value.ToString();
+                txtAddress.Text = r.Cells["Address"].Value.ToString();
+               
+            }
+        }
+
+
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -72,6 +87,38 @@ namespace QLBN_COVID
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
+            if (r == null)
+            {
+                MessageBox.Show("Vui lòng chọn bệnh nhân cần xóa", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (
+                 MessageBox.Show("Bạn thực sự muốn xóa bệnh nhân  " + r.Cells["CMND"].Value.ToString() + " ?",
+                                      "Xác nhận xóa",
+                                      MessageBoxButtons.YesNo,
+                                      MessageBoxIcon.Question) == DialogResult.Yes
+                )
+            {
+                try
+                {
+                    var us = db.Patients.SingleOrDefault(x => x.CMND == r.Cells["CMND"].Value.ToString());
+                    db.Patients.DeleteOnSubmit(us);
+                    db.SubmitChanges();
+                    MessageBox.Show("Xóa bệnh nhân  thành công!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Xóa bệnh nhân  thất bại!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    showData();
+                    txtCMND.Text = txtFullName.Text = txtYearOfBirth.Text = txtAddress.Text = null;
+                    r = null;
+                }
+            }
         }
+
+       
     }
 }

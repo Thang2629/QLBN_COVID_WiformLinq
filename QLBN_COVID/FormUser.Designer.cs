@@ -39,12 +39,18 @@ namespace QLBN_COVID
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtTen = new System.Windows.Forms.TextBox();
+            this.txtRole = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataUser)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPass
             // 
-            this.txtPass.Location = new System.Drawing.Point(156, 138);
+            this.txtPass.Location = new System.Drawing.Point(156, 126);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(173, 20);
             this.txtPass.TabIndex = 17;
@@ -56,7 +62,7 @@ namespace QLBN_COVID
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label1.Location = new System.Drawing.Point(54, 138);
+            this.label1.Location = new System.Drawing.Point(54, 123);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 17);
             this.label1.TabIndex = 16;
@@ -69,7 +75,7 @@ namespace QLBN_COVID
             this.lblPlace.BackColor = System.Drawing.Color.Transparent;
             this.lblPlace.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlace.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblPlace.Location = new System.Drawing.Point(52, 89);
+            this.lblPlace.Location = new System.Drawing.Point(52, 76);
             this.lblPlace.Name = "lblPlace";
             this.lblPlace.Size = new System.Drawing.Size(76, 17);
             this.lblPlace.TabIndex = 15;
@@ -86,10 +92,12 @@ namespace QLBN_COVID
             this.dataUser.Name = "dataUser";
             this.dataUser.Size = new System.Drawing.Size(804, 169);
             this.dataUser.TabIndex = 14;
+            this.dataUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataUser_CellClick);
+           
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(156, 89);
+            this.txtUser.Location = new System.Drawing.Point(156, 73);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(173, 20);
             this.txtUser.TabIndex = 13;
@@ -148,6 +156,67 @@ namespace QLBN_COVID
             this.btnDelete.TabIndex = 26;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(42, 181);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 17);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Tên Đầy Đủ";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(453, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 17);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Quyền";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label6.Location = new System.Drawing.Point(437, 126);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 17);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Trậng Thái";
+            // 
+            // txtTen
+            // 
+            this.txtTen.Location = new System.Drawing.Point(156, 181);
+            this.txtTen.Name = "txtTen";
+            this.txtTen.Size = new System.Drawing.Size(173, 20);
+            this.txtTen.TabIndex = 32;
+            // 
+            // txtRole
+            // 
+            this.txtRole.Location = new System.Drawing.Point(567, 73);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.Size = new System.Drawing.Size(173, 20);
+            this.txtRole.TabIndex = 33;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(567, 120);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(173, 20);
+            this.txtStatus.TabIndex = 34;
             // 
             // FormUser
             // 
@@ -155,6 +224,12 @@ namespace QLBN_COVID
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.txtRole);
+            this.Controls.Add(this.txtTen);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
@@ -182,5 +257,11 @@ namespace QLBN_COVID
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtTen;
+        private System.Windows.Forms.TextBox txtRole;
+        private System.Windows.Forms.TextBox txtStatus;
     }
 }

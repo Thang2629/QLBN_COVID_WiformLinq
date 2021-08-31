@@ -22,7 +22,7 @@ namespace QLBN_COVID
         private void FormNoiDieuTri_Load(object sender, EventArgs e)
         {
             db = new CovidDataContext();
-            
+
             showData();
             dataPlaceOfTreatment.Columns["ID"].HeaderText = "ID";
             dataPlaceOfTreatment.Columns["Name"].HeaderText = "Nơi điều trị";
@@ -44,9 +44,57 @@ namespace QLBN_COVID
                          p.Name,
                          p.Capacity,
                          p.Current_Quantity,
-                         Address= a.Street + ", " + w.Name_of_ward + ", "+ d.Name_of_district + ", "+ c.Name_of_city   
+                         Address = a.Street + ", " + w.Name_of_ward + ", " + d.Name_of_district + ", " + c.Name_of_city
                      };
             dataPlaceOfTreatment.DataSource = rs;
         }
+
+        private void dataPlaceOfTreatment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                r = dataPlaceOfTreatment.Rows[e.RowIndex];
+                txtPlace.Text = r.Cells["name"].Value.ToString();
+                txtAddress.Text = r.Cells["address"].Value.ToString();
+                txtQuantity.Text = r.Cells["capacity"].Value.ToString();
+                txtNumber.Text = r.Cells["current_Quantity"].Value.ToString();
+
+            }
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (r == null)
+            {
+                MessageBox.Show("Vui lòng chọn nơi điều trị cần xóa", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (
+                 MessageBox.Show("Bạn thực sự muốn xóa nơi điều trị  " + r.Cells["name"].Value.ToString() + " ?",
+                                      "Xác nhận xóa",
+                                      MessageBoxButtons.YesNo,
+                                      MessageBoxIcon.Question) == DialogResult.Yes
+                )
+            {
+                try
+                {
+                    var us = db.Place_Of_Treatments.SingleOrDefault(x => x.Name== r.Cells["name"].Value.ToString());
+                    db.Place_Of_Treatments.DeleteOnSubmit(us);
+                    db.SubmitChanges();
+                    MessageBox.Show("Xóa nơi điều trị thành công!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Xóa nơi điều trị thất bại!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    showData();
+                    txtPlace.Text = txtAddress.Text = txtQuantity.Text = txtNumber.Text = null;
+                    r = null;
+                }
+            }
+        }
+
+        
     }
 }
