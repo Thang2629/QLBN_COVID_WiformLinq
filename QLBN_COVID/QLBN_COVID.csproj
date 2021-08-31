@@ -95,6 +95,9 @@
     <EmbeddedResource Include="FormNoiDieuTri.resx">
       <DependentUpon>FormNoiDieuTri.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormUser.resx">
+      <DependentUpon>FormUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
