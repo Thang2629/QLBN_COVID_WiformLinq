@@ -23,26 +23,24 @@ namespace QLBN_COVID
             var requifield = new RequiredFieldValidatior();
             requifield.AddControl(txtPlace);
             requifield.AddControl(txtAddress);
-            requifield.AddControl(txtQuantity);
-            requifield.AddControl(txtNumber);
+           
 
-            var UnField5 = new RegexValidator(@"^[0-9]$");
-            UnField5.ErrorMessage = "invalid";
-            UnField5.AddControl(txtQuantity);
-            UnField5.AddControl(txtNumber);
-
+           
+            //Address- cái này bị sai chưa biết làm sao 
             var UnField6 = new RegexValidator(@"^[a-z][a-z0-9\-_\.]*$");
             UnField6.ErrorMessage = "invalid";
             UnField6.AddControl(txtAddress);
 
+
+            //Place-bắt đầu bằng chữ có số 
             var UnField7 = new RegexValidator(@"^[a-z][a-z0-9\-_\.]*$");
             UnField7.ErrorMessage = "invalid";
-            UnField7.AddControl(txtAddress);
+            UnField7.AddControl(txtPlace);
 
 
 
         }
-
+        //kiểm tra trống
         private void TxtNumber_Validating(object sender, CancelEventArgs e)
         {
             if (txtNumber.Text == "")
@@ -78,7 +76,7 @@ namespace QLBN_COVID
                 e.Cancel = true;
             }
         }
-
+        //-------------------------------------------------------------//
         private DataGridViewRow r;
         private CovidDataContext db;
         private void FormNoiDieuTri_Load(object sender, EventArgs e)

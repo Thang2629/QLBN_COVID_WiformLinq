@@ -26,23 +26,33 @@ namespace QLBN_COVID
             requifield.AddControl(txtAddress);
             requifield.AddControl(txtYearOfBirth);
 
+
+            //YearOfBirth----------------------------------
             var UnField1 = new RegexValidator(@"^([0-9]{4})$");
             UnField1.ErrorMessage = "invalid";
             UnField1.AddControl(txtYearOfBirth);
 
+
+            //FullName-------------------------------
             var UnFieldName2 = new RegexValidator(@"^[a-z]*$");
             UnFieldName2.ErrorMessage = "invalid";
             UnFieldName2.AddControl(txtFullName);
 
+
+            //Address- cái này chưa biết sửa 
             var UnField3 = new RegexValidator(@"^[a-z][a-z0-9\-_\.]*$");
             UnField3.ErrorMessage = "invalid";
             UnField3.AddControl(txtAddress);
 
+
+            //CMND-10 số
             var UnField4 = new RegexValidator(@"^([0-9]{10})$");
             UnField4.ErrorMessage = "invalid";
             UnField4.AddControl(txtCMND);
         }
 
+
+        //kiểm tra rỗng
         private void TxtYearOfBirth_Validating(object sender, CancelEventArgs e)
         {
             if (txtYearOfBirth.Text == "")
