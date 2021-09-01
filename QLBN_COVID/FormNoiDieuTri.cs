@@ -16,7 +16,69 @@ namespace QLBN_COVID
         public FormNoiDieuTri()
         {
             InitializeComponent();
+            txtPlace.Validating += TxtPlace_Validating;
+            txtAddress.Validating += TxtAddress_Validating;
+            txtQuantity.Validating += TxtQuantity_Validating;
+            txtNumber.Validating += TxtNumber_Validating;
+            var requifield = new RequiredFieldValidatior();
+            requifield.AddControl(txtPlace);
+            requifield.AddControl(txtAddress);
+            requifield.AddControl(txtQuantity);
+            requifield.AddControl(txtNumber);
+
+            var UnField5 = new RegexValidator(@"^[0-9]$");
+            UnField5.ErrorMessage = "invalid";
+            UnField5.AddControl(txtQuantity);
+            UnField5.AddControl(txtNumber);
+
+            var UnField6 = new RegexValidator(@"^[a-z][a-z0-9\-_\.]*$");
+            UnField6.ErrorMessage = "invalid";
+            UnField6.AddControl(txtAddress);
+
+            var UnField7 = new RegexValidator(@"^[a-z][a-z0-9\-_\.]*$");
+            UnField7.ErrorMessage = "invalid";
+            UnField7.AddControl(txtAddress);
+
+
+
         }
+
+        private void TxtNumber_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtNumber.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
+        private void TxtQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtQuantity.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
+        private void TxtAddress_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtAddress.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
+        private void TxtPlace_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtPlace.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
         private DataGridViewRow r;
         private CovidDataContext db;
         private void FormNoiDieuTri_Load(object sender, EventArgs e)
@@ -124,14 +186,10 @@ namespace QLBN_COVID
             p.Name = txtPlace.Text;
             p.Capacity = int.Parse(txtQuantity.Text);
             p.Current_Quantity = int.Parse(txtNumber.Text);
-            p.Address.IDCity =int.Parse(cbCity.SelectedValue.ToString());
+            p.Address.IDCity =int.Parse(cbCity.SelectedIndex.ToString());
             p.Address.IDDistrict = int.Parse(cbxDistrict.SelectedValue.ToString());
             p.Address.IDWard = int.Parse(cbxWard.SelectedValue.ToString());
             p.Address.Street = txtAddress.Text;
-            
-
-
-
             db.Place_Of_Treatments.InsertOnSubmit(p);
             db.SubmitChanges();
             
@@ -140,6 +198,11 @@ namespace QLBN_COVID
             showData(); 
             txtPlace.Text = txtQuantity.Text = txtNumber.Text=null;
             cbxDistrict.SelectedIndex = -1;
+        }
+
+        private void txtPlace_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

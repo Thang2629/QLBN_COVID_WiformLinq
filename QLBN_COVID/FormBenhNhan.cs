@@ -16,7 +16,69 @@ namespace QLBN_COVID
         public FormBenhNhan()
         {
             InitializeComponent();
+            txtCMND.Validating += TxtCMND_Validating;
+            txtFullName.Validating += TxtFullName_Validating;
+            txtAddress.Validating += TxtAddress_Validating;
+            txtYearOfBirth.Validating += TxtYearOfBirth_Validating;
+            var requifield = new RequiredFieldValidatior();
+            requifield.AddControl(txtCMND);
+            requifield.AddControl(txtFullName);
+            requifield.AddControl(txtAddress);
+            requifield.AddControl(txtYearOfBirth);
+
+            var UnField1 = new RegexValidator(@"^([0-9]{4})$");
+            UnField1.ErrorMessage = "invalid";
+            UnField1.AddControl(txtYearOfBirth);
+
+            var UnFieldName2 = new RegexValidator(@"^[a-z]*$");
+            UnFieldName2.ErrorMessage = "invalid";
+            UnFieldName2.AddControl(txtFullName);
+
+            var UnField3 = new RegexValidator(@"^[a-z][a-z0-9\-_\.]*$");
+            UnField3.ErrorMessage = "invalid";
+            UnField3.AddControl(txtAddress);
+
+            var UnField4 = new RegexValidator(@"^([0-9]{10})$");
+            UnField4.ErrorMessage = "invalid";
+            UnField4.AddControl(txtCMND);
         }
+
+        private void TxtYearOfBirth_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtYearOfBirth.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
+        private void TxtAddress_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtAddress.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
+        private void TxtFullName_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtFullName.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
+        private void TxtCMND_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtCMND.Text == "")
+            {
+                MessageBox.Show("khong dc trong ");
+                e.Cancel = true;
+            }
+        }
+
         private DataGridViewRow r;
         private CovidDataContext db;
         private void cbxPlaceOfTreatment_SelectedIndexChanged(object sender, EventArgs e)
