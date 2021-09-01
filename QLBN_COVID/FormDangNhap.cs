@@ -54,23 +54,39 @@ namespace QLBN_COVID
             var tk = db.User_Logs.SingleOrDefault(x => x.Username == txtUser.Text && x.Password == txtPass.Text);
             if (tk != null && (txtCapcha.Text.Equals(recapcha) || txtCapcha.Text.Equals(newcapcha)))
             {
-                if(tk.Role == 1)
+                if(tk.Status == 1)
                 {
-                    user = tk;
-                    
-                    this.Hide();
-                    FormMain f = new FormMain();
-                    f.Show();
-                    FormMain.mdiobj.placeOfTreatmentToolStripMenuItem.Enabled = true;
-                    FormMain.mdiobj.userToolStripMenuItem.Enabled = true;
+                    if (tk.Role == 1)
+                    {
+                        user = tk;
+
+                        this.Hide();
+                        FormMain f = new FormMain();
+                        f.Show();
+                        FormMain.mdiobj.placeOfTreatmentToolStripMenuItem.Enabled = true;
+                        FormMain.mdiobj.userToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        user = tk;
+                        this.Hide();
+                        FormMain f = new FormMain();
+                        f.Show();
+                    }
                 }
-                else
+                else if(tk.Status == 2)
                 {
-                    user = tk;
-                    this.Hide();
-                    FormMain f = new FormMain();
-                    f.Show();
+                    MessageBox.Show("Tài khoản của bạn đã bị khoá\nVui lòng liên hệ trực tiếp với admin để được kiểm tra", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtUser.Select();
+                    return;
+                }
+                else if(tk.Status == 3)
+                {
+                    MessageBox.Show("Tài khoản của bạn đang chờ admin phê duyệt\nVui lòng liên hệ trực tiếp với admin để được phê duyệt ngay lập tức", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtUser.Select();
+                    return;
                 }    
+                  
 
             }
             else
