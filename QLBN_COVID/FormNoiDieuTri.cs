@@ -24,6 +24,22 @@ namespace QLBN_COVID
             db = new CovidDataContext();
 
             showData();
+            cbCity.DataSource = db.Cities;
+            cbCity.DisplayMember = "Name_of_city";
+            cbCity.ValueMember = "IDCity";
+            cbCity.SelectedIndex = -1;
+
+
+            cbxWard.DataSource = db.Wards;
+            cbxWard.DisplayMember = "Name_of_ward";
+            cbxWard.ValueMember = "IDWard";
+            cbxWard.SelectedIndex = -1;
+
+            cbxDistrict.DataSource = db.Districts;
+            cbxDistrict.DisplayMember = "Name_of_district";
+            cbxDistrict.ValueMember = "IDDistrict";
+            cbxDistrict.SelectedIndex = -1;
+
             dataPlaceOfTreatment.Columns["ID"].HeaderText = "ID";
             dataPlaceOfTreatment.Columns["Name"].HeaderText = "Nơi điều trị";
             dataPlaceOfTreatment.Columns["Capacity"].HeaderText = "Sức chứa";
@@ -95,6 +111,35 @@ namespace QLBN_COVID
             }
         }
 
-        
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPlace.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên nơi điều trị", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPlace.Select();
+                return;
+            }
+            var p = new Place_Of_Treatment();
+            //-----------------------------------------
+            p.Name = txtPlace.Text;
+            p.Capacity = int.Parse(txtQuantity.Text);
+            p.Current_Quantity = int.Parse(txtNumber.Text);
+            p.Address.IDCity =int.Parse(cbCity.SelectedValue.ToString());
+            p.Address.IDDistrict = int.Parse(cbxDistrict.SelectedValue.ToString());
+            p.Address.IDWard = int.Parse(cbxWard.SelectedValue.ToString());
+            p.Address.Street = txtAddress.Text;
+            
+
+
+
+            db.Place_Of_Treatments.InsertOnSubmit(p);
+            db.SubmitChanges();
+            
+
+            MessageBox.Show("Thêm mới phòng thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            showData(); 
+            txtPlace.Text = txtQuantity.Text = txtNumber.Text=null;
+            cbxDistrict.SelectedIndex = -1;
+        }
     }
 }

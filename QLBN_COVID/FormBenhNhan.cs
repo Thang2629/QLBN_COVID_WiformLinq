@@ -28,6 +28,39 @@ namespace QLBN_COVID
         {
             db = new CovidDataContext();
             showData();
+            cbxCity.DataSource = db.Cities;
+            cbxCity.DisplayMember = "Name_of_city";
+            cbxCity.ValueMember = "IDCity";
+            cbxCity.SelectedIndex = -1;
+
+
+            cbxStatus.DataSource = db.Status;
+            cbxStatus.DisplayMember = "Kind_of_status";
+            cbxStatus.ValueMember = "IdStatus";
+            cbxStatus.SelectedIndex = -1;
+
+
+            cbxWard.DataSource = db.Wards;
+            cbxWard.DisplayMember = "Name_of_ward";
+            cbxWard.ValueMember = "IDWard";
+            cbxWard.SelectedIndex = -1;
+
+            cbxDistrict.DataSource = db.Districts;
+            cbxDistrict.DisplayMember = "Name_of_district";
+            cbxDistrict.ValueMember = "IDDistrict";
+            cbxDistrict.SelectedIndex = -1;
+
+
+            cbxPlaceOfTreatment.DataSource = db.Place_Of_Treatments;
+            cbxPlaceOfTreatment.DisplayMember = "Name";
+            cbxPlaceOfTreatment.ValueMember = "ID";
+            cbxPlaceOfTreatment.SelectedIndex = -1;
+            //------------------------------------------------------------
+            cbxPeopleInvolved.DataSource = db.Patients;
+            cbxPeopleInvolved.DisplayMember = "People_Involved";
+            //cbxPeopleInvolved.ValueMember = "CMND";
+            cbxPeopleInvolved.SelectedIndex = -1;
+            //------------------------------------------------------------
             dataPatient.Columns["FullName"].HeaderText = "Họ và tên";
             dataPatient.Columns["YearOfBirth"].HeaderText = "Năm sinh";
             dataPatient.Columns["Address"].HeaderText = "Địa chỉ";
@@ -70,13 +103,48 @@ namespace QLBN_COVID
                
             }
         }
-
-
-
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtCMND.Text))
+            {
+                MessageBox.Show("Vui lòng nhập CMND", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCMND.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtFullName.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtFullName.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtYearOfBirth.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtYearOfBirth.Select();
+                return;
+            }
 
+            var nv = new Patient();
+            nv.CMND = txtCMND.Text;          
+            nv.FullName = txtFullName.Text;
+            nv.YearOfBirth = int.Parse(txtYearOfBirth.Text);
+            nv.Address.IDWard = int.Parse(cbxWard.SelectedValue.ToString());
+            nv.Address.IDDistrict = int.Parse(cbxDistrict.SelectedValue.ToString());
+            nv.Address.IDCity = int.Parse(cbxCity.SelectedValue.ToString());
+            nv.Address.Street = txtAddress.Text;
+
+            nv.Place_Of_Treatment.Name = cbxPlaceOfTreatment.SelectedValue.ToString();
+            nv.Status.Kind_Of_Status = cbxStatus.SelectedIndex.ToString();
+            nv.People_Involved = cbxPeopleInvolved.SelectedValue.ToString();
+            
+            db.Patients.InsertOnSubmit(nv);
+            db.SubmitChanges();
+            MessageBox.Show("Thêm mới nhân viên thành công!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            showData();
+            txtCMND.Text=txtFullName.Text=txtYearOfBirth.Text=txtAddress.Text = null;
+            
+            cbxPeopleInvolved.SelectedIndex =cbxPlaceOfTreatment.SelectedIndex=cbxCity.SelectedIndex
+                =cbxDistrict.SelectedIndex=cbxWard.SelectedIndex=cbxStatus.SelectedIndex= -1;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

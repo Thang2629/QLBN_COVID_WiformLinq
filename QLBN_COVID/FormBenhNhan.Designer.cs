@@ -51,7 +51,7 @@ namespace QLBN_COVID
             this.cbxDistrict = new System.Windows.Forms.ComboBox();
             this.lblDistrict = new System.Windows.Forms.Label();
             this.lblCity = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxCity = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -70,6 +70,7 @@ namespace QLBN_COVID
             this.dataPatient.Name = "dataPatient";
             this.dataPatient.Size = new System.Drawing.Size(800, 150);
             this.dataPatient.TabIndex = 0;
+            this.dataPatient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataPatient_CellClick);
             // 
             // label2
             // 
@@ -305,15 +306,15 @@ namespace QLBN_COVID
             this.lblCity.TabIndex = 21;
             this.lblCity.Text = "Tỉnh/Thành phố:";
             // 
-            // comboBox1
+            // cbxCity
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(481, 183);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 23);
-            this.comboBox1.TabIndex = 22;
+            this.cbxCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxCity.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxCity.FormattingEnabled = true;
+            this.cbxCity.Location = new System.Drawing.Point(481, 183);
+            this.cbxCity.Name = "cbxCity";
+            this.cbxCity.Size = new System.Drawing.Size(145, 23);
+            this.cbxCity.TabIndex = 22;
             // 
             // btnAdd
             // 
@@ -369,7 +370,7 @@ namespace QLBN_COVID
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbxCity);
             this.Controls.Add(this.lblCity);
             this.Controls.Add(this.lblDistrict);
             this.Controls.Add(this.cbxDistrict);
@@ -423,7 +424,7 @@ namespace QLBN_COVID
         private System.Windows.Forms.ComboBox cbxDistrict;
         private System.Windows.Forms.Label lblDistrict;
         private System.Windows.Forms.Label lblCity;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxCity;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;

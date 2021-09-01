@@ -33,7 +33,6 @@ namespace QLBN_COVID
             this.txtPass = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPlace = new System.Windows.Forms.Label();
-            this.dataUser = new System.Windows.Forms.DataGridView();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -41,11 +40,10 @@ namespace QLBN_COVID
             this.btnDelete = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.txtRole = new System.Windows.Forms.TextBox();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataUser)).BeginInit();
+            this.dgvUser = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPass
@@ -81,20 +79,6 @@ namespace QLBN_COVID
             this.lblPlace.TabIndex = 15;
             this.lblPlace.Text = "Tài Khoản";
             // 
-            // dataUser
-            // 
-            this.dataUser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataUser.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataUser.Location = new System.Drawing.Point(-3, 281);
-            this.dataUser.Name = "dataUser";
-            this.dataUser.Size = new System.Drawing.Size(804, 169);
-            this.dataUser.TabIndex = 14;
-            this.dataUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataUser_CellClick);
-           
-            // 
             // txtUser
             // 
             this.txtUser.Location = new System.Drawing.Point(156, 73);
@@ -128,6 +112,7 @@ namespace QLBN_COVID
             this.btnAdd.TabIndex = 24;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -184,19 +169,6 @@ namespace QLBN_COVID
             this.label5.TabIndex = 29;
             this.label5.Text = "Quyền";
             // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(437, 126);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 17);
-            this.label6.TabIndex = 30;
-            this.label6.Text = "Trậng Thái";
-            // 
             // txtTen
             // 
             this.txtTen.Location = new System.Drawing.Point(156, 181);
@@ -211,12 +183,15 @@ namespace QLBN_COVID
             this.txtRole.Size = new System.Drawing.Size(173, 20);
             this.txtRole.TabIndex = 33;
             // 
-            // txtStatus
+            // dgvUser
             // 
-            this.txtStatus.Location = new System.Drawing.Point(567, 120);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(173, 20);
-            this.txtStatus.TabIndex = 34;
+            this.dgvUser.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUser.Location = new System.Drawing.Point(0, 302);
+            this.dgvUser.Name = "dgvUser";
+            this.dgvUser.Size = new System.Drawing.Size(802, 150);
+            this.dgvUser.TabIndex = 34;
+            this.dgvUser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUser_CellClick);
             // 
             // FormUser
             // 
@@ -224,10 +199,9 @@ namespace QLBN_COVID
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtStatus);
+            this.Controls.Add(this.dgvUser);
             this.Controls.Add(this.txtRole);
             this.Controls.Add(this.txtTen);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnDelete);
@@ -237,11 +211,11 @@ namespace QLBN_COVID
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPlace);
-            this.Controls.Add(this.dataUser);
             this.Controls.Add(this.txtUser);
             this.Name = "FormUser";
             this.Text = "FormUser";
-            ((System.ComponentModel.ISupportInitialize)(this.dataUser)).EndInit();
+            this.Load += new System.EventHandler(this.FormUser_Load_1);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,7 +225,6 @@ namespace QLBN_COVID
         private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblPlace;
-        private System.Windows.Forms.DataGridView dataUser;
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAdd;
@@ -259,9 +232,8 @@ namespace QLBN_COVID
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.TextBox txtRole;
-        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.DataGridView dgvUser;
     }
 }

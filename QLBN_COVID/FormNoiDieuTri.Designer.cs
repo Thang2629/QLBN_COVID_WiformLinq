@@ -41,7 +41,7 @@ namespace QLBN_COVID
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbCity = new System.Windows.Forms.ComboBox();
             this.lblCity = new System.Windows.Forms.Label();
             this.lblDistrict = new System.Windows.Forms.Label();
             this.cbxDistrict = new System.Windows.Forms.ComboBox();
@@ -77,6 +77,7 @@ namespace QLBN_COVID
             this.dataPlaceOfTreatment.Name = "dataPlaceOfTreatment";
             this.dataPlaceOfTreatment.Size = new System.Drawing.Size(800, 168);
             this.dataPlaceOfTreatment.TabIndex = 4;
+            this.dataPlaceOfTreatment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataPlaceOfTreatment_CellClick);
             // 
             // txtPlace
             // 
@@ -160,6 +161,7 @@ namespace QLBN_COVID
             this.btnDelete.TabIndex = 30;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -188,16 +190,17 @@ namespace QLBN_COVID
             this.btnAdd.TabIndex = 28;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // comboBox1
+            // cbCity
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(144, 235);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 23);
-            this.comboBox1.TabIndex = 38;
+            this.cbCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCity.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCity.FormattingEnabled = true;
+            this.cbCity.Location = new System.Drawing.Point(144, 235);
+            this.cbCity.Name = "cbCity";
+            this.cbCity.Size = new System.Drawing.Size(145, 23);
+            this.cbCity.TabIndex = 38;
             // 
             // lblCity
             // 
@@ -287,7 +290,7 @@ namespace QLBN_COVID
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbCity);
             this.Controls.Add(this.lblCity);
             this.Controls.Add(this.lblDistrict);
             this.Controls.Add(this.cbxDistrict);
@@ -328,7 +331,7 @@ namespace QLBN_COVID
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbCity;
         private System.Windows.Forms.Label lblCity;
         private System.Windows.Forms.Label lblDistrict;
         private System.Windows.Forms.ComboBox cbxDistrict;

@@ -11,3 +11,17 @@ F:\HOANG DUY\QLBN_COVID\QLBN_COVID\obj\Debug\QLBN_COVID.csprojAssemblyReference.
 F:\HOANG DUY\QLBN_COVID\QLBN_COVID\obj\Debug\QLBN_COVID.FormMain.resources
 F:\HOANG DUY\QLBN_COVID\QLBN_COVID\obj\Debug\QLBN_COVID.FormBenhNhan.resources
 F:\HOANG DUY\QLBN_COVID\QLBN_COVID\obj\Debug\QLBN_COVID.FormNoiDieuTri.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\bin\Debug\QLBN_COVID.exe.config
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\bin\Debug\QLBN_COVID.exe
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\bin\Debug\QLBN_COVID.pdb
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.csprojAssemblyReference.cache
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.FormBenhNhan.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.FormLogin.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.FormMain.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.FormNoiDieuTri.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.FormUser.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.Properties.Resources.resources
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.csproj.GenerateResource.cache
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.csproj.CoreCompileInputs.cache
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.exe
+C:\Users\CHEESE\Desktop\testgit\QLBN_COVID_WiformLinq\QLBN_COVID\obj\Debug\QLBN_COVID.pdb

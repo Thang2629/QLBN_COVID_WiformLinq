@@ -23,12 +23,11 @@ namespace QLBN_COVID
         {
             db = new CovidDataContext();
             Showdata();
-            dataUser.Columns["ID"].HeaderText = "id";
-            dataUser.Columns["Username"].HeaderText = "tai khoan";
-            dataUser.Columns["Password"].HeaderText = "Mat Khau";
-            dataUser.Columns["Role"].HeaderText = "quyen";
-            dataUser.Columns["FullName"].HeaderText = "ten";
-            dataUser.Columns["Status"].HeaderText = "trang thai";
+            dgvUser.Columns["ID"].HeaderText = "id";
+            dgvUser.Columns["Username"].HeaderText = "tai khoan";
+            dgvUser.Columns["Password"].HeaderText = "Mat Khau";
+            dgvUser.Columns["Role"].HeaderText = "quyen";
+            dgvUser.Columns["FullName"].HeaderText = "ten";
         }
         private void Showdata()
         {
@@ -43,22 +42,21 @@ namespace QLBN_COVID
                          a.FullName,
                          a.Status
                      };
-            dataUser.DataSource = ra;
+             dgvUser.DataSource = ra;
         }
-        private void dataUser_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+        private void dgvUser_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (e.RowIndex >= 0)
             {
-                r = dataUser.Rows[e.RowIndex];
+                r = dgvUser.Rows[e.RowIndex];
                 txtUser.Text = r.Cells["Username"].Value.ToString();
                 txtPass.Text = r.Cells["Password"].Value.ToString();
                 txtRole.Text = r.Cells["Role"].Value.ToString();
                 txtTen.Text = r.Cells["FullName"].Value.ToString();
-                txtStatus.Text = r.Cells["Status"].Value.ToString();
             }
-
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (r == null)
@@ -87,13 +85,63 @@ namespace QLBN_COVID
                 finally
                 {
                     Showdata();
-                    txtUser.Text = txtPass.Text = txtTen.Text = txtRole.Text = txtStatus.Text = null; 
+                    txtUser.Text = txtPass.Text = txtTen.Text = txtRole.Text = null;
                     r = null;
                 }
             }
         }
 
-        
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtUser.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tài khoản nhân viên", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUser.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtPass.Text))
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPass.Select();
+                return;
+            }
+            //var c = db.User_Logs.Where(x => x.Username.Trim().ToLower() == txtUser.Text.Trim().ToLower()).Count();
+
+            //if (c > 0)
+            //{
+            //    MessageBox.Show("Tài khoản này đã tồn tại", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    txtUser.Select();
+            //    return;
+            //}
+
+
+
+
+            ////Object reference not set to an instance of an object.'
+            var nv = new User_Log();
+            nv.Username = txtUser.Text;
+            nv.Password = txtPass.Text;
+            nv.FullName = txtTen.Text;
+            nv.Role = int.Parse(txtRole.Text);
+            db.User_Logs.InsertOnSubmit(nv);//
+            db.SubmitChanges();
+            MessageBox.Show("Thêm mới tài khoản thành công!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Showdata();
+            txtUser.Text = txtPass.Text = txtTen.Text = txtRole.Text = null;
+
+
+
+        }
+
+        private void FormUser_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
+   
+
+        
+    
 }
+
     
