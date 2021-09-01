@@ -10,8 +10,9 @@
 
 namespace QLBN_COVID.Properties {
     using System;
-    
-    
+    using System.Drawing;
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -78,6 +79,11 @@ namespace QLBN_COVID.Properties {
                 object obj = ResourceManager.GetObject("unlock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
+        }
+
+        internal static Image GetObject(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

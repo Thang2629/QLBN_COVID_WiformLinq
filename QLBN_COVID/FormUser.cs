@@ -22,76 +22,80 @@ namespace QLBN_COVID
         private void FormUser_Load(object sender, EventArgs e)
         {
             db = new CovidDataContext();
-            Showdata();
-            dataUser.Columns["ID"].HeaderText = "id";
-            dataUser.Columns["Username"].HeaderText = "tai khoan";
-            dataUser.Columns["Password"].HeaderText = "Mat Khau";
-            dataUser.Columns["Role"].HeaderText = "quyen";
-            dataUser.Columns["FullName"].HeaderText = "ten";
-            dataUser.Columns["Status"].HeaderText = "trang thai";
-        }
-        private void Showdata()
-        {
+            cbxStatus.DataSource = db.User_Status;
+            cbxStatus.DisplayMember = "Statusname";
+            cbxRole.DataSource = db.User_Roles;
+            cbxRole.DisplayMember = "Rolename";
+            showData();
+            dataUser.Columns["Username"].HeaderText = "Tài khoản";
+            dataUser.Columns["Password"].HeaderText = "Mật khẩu";
+            dataUser.Columns["FullName"].HeaderText = "Tên user";
+            dataUser.Columns["Rolename"].HeaderText = "Quyền";
+            dataUser.Columns["Statusname"].HeaderText = "Trạng thái";
 
-            var ra = from a in db.User_Logs
+        }
+        private void showData()
+        {
+            var rs = from u in db.User_Logs
+                     join r in db.User_Roles on u.Role equals r.IDRole
+                     join s in db.User_Status on u.Status equals s.IDStatus
                      select new
                      {
-                         a.ID,
-                         a.Username,
-                         a.Password,
-                         a.Role,
-                         a.FullName,
-                         a.Status
+                         u.Username,
+                         u.Password,
+                         u.FullName,
+                         r.Rolename,
+                         s.Statusname
                      };
-            dataUser.DataSource = ra;
+            dataUser.DataSource = rs;
         }
+
         private void dataUser_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (dataUser.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dataUser.CurrentRow.Selected = true;
+                txtUsername.Text = dataUser.Rows[e.RowIndex].Cells["Username"].FormattedValue.ToString();
+                txtPass.Text = dataUser.Rows[e.RowIndex].Cells["Password"].FormattedValue.ToString();
+                txtName.Text = dataUser.Rows[e.RowIndex].Cells["FullName"].FormattedValue.ToString();
+                cbxRole.Text = dataUser.Rows[e.RowIndex].Cells["Rolename"].FormattedValue.ToString();
+                cbxStatus.Text = dataUser.Rows[e.RowIndex].Cells["Statusname"].FormattedValue.ToString();
 
-            if (e.RowIndex >= 0)
-            {
-                r = dataUser.Rows[e.RowIndex];
-                txtUser.Text = r.Cells["Username"].Value.ToString();
-                txtPass.Text = r.Cells["Password"].Value.ToString();
-                txtRole.Text = r.Cells["Role"].Value.ToString();
-                txtTen.Text = r.Cells["FullName"].Value.ToString();
-                txtStatus.Text = r.Cells["Status"].Value.ToString();
-            }
-
-        }
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (r == null)
-            {
-                MessageBox.Show("Vui lòng chọn tài khoản cần xóa", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (
-                 MessageBox.Show("Bạn thực sự muốn xóa Tài Khoản  " + r.Cells["Username"].Value.ToString() + " ?",
-                                      "Xác nhận xóa",
-                                      MessageBoxButtons.YesNo,
-                                      MessageBoxIcon.Question) == DialogResult.Yes
-                )
-            {
-                try
-                {
-                    var us = db.User_Logs.SingleOrDefault(x => x.Username == r.Cells["Username"].Value.ToString());
-                    db.User_Logs.DeleteOnSubmit(us);
-                    db.SubmitChanges();
-                    MessageBox.Show("Xóa tài khoản thành công!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch
-                {
-                    MessageBox.Show("Xóa tài khoản thất bại!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    Showdata();
-                    txtUser.Text = txtPass.Text = txtTen.Text = txtRole.Text = txtStatus.Text = null; 
-                    r = null;
-                }
             }
         }
+        //private void btnDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (r == null)
+        //    {
+        //        MessageBox.Show("Vui lòng chọn tài khoản cần xóa", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        return;
+        //    }
+        //    if (
+        //         MessageBox.Show("Bạn thực sự muốn xóa Tài Khoản  " + r.Cells["Username"].Value.ToString() + " ?",
+        //                              "Xác nhận xóa",
+        //                              MessageBoxButtons.YesNo,
+        //                              MessageBoxIcon.Question) == DialogResult.Yes
+        //        )
+        //    {
+        //        try
+        //        {
+        //            var us = db.User_Logs.SingleOrDefault(x => x.Username == r.Cells["Username"].Value.ToString());
+        //            db.User_Logs.DeleteOnSubmit(us);
+        //            db.SubmitChanges();
+        //            MessageBox.Show("Xóa tài khoản thành công!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        catch
+        //        {
+        //            MessageBox.Show("Xóa tài khoản thất bại!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //        finally
+        //        {
+        //            showData();
+        //            txtUsername.Text = txtPass.Text = txtName.Text = cbxRole.Text = cbxStatus.Text = null; 
+        //            r = null;
+        //        }
+        //    }
+        //}
 
         
     }

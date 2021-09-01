@@ -60,6 +60,12 @@ namespace QLBN_COVID.DB
     partial void InsertUser_Log(User_Log instance);
     partial void UpdateUser_Log(User_Log instance);
     partial void DeleteUser_Log(User_Log instance);
+    partial void InsertUser_Role(User_Role instance);
+    partial void UpdateUser_Role(User_Role instance);
+    partial void DeleteUser_Role(User_Role instance);
+    partial void InsertUser_Status(User_Status instance);
+    partial void UpdateUser_Status(User_Status instance);
+    partial void DeleteUser_Status(User_Status instance);
     #endregion
 		
 		public CovidDataContext() : 
@@ -169,6 +175,22 @@ namespace QLBN_COVID.DB
 			get
 			{
 				return this.GetTable<User_Log>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User_Role> User_Roles
+		{
+			get
+			{
+				return this.GetTable<User_Role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User_Status> User_Status
+		{
+			get
+			{
+				return this.GetTable<User_Status>();
 			}
 		}
 	}
@@ -1492,7 +1514,7 @@ namespace QLBN_COVID.DB
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -2005,13 +2027,17 @@ namespace QLBN_COVID.DB
 		
 		private string _Password;
 		
-		private int _Role;
-		
 		private string _FullName;
 		
-		private string _Status;
+		private int _Role;
+		
+		private int _Status;
 		
 		private EntitySet<User_Activity> _User_Activities;
+		
+		private EntityRef<User_Role> _User_Role;
+		
+		private EntityRef<User_Status> _User_Status;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2023,17 +2049,19 @@ namespace QLBN_COVID.DB
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
-    partial void OnRoleChanging(int value);
-    partial void OnRoleChanged();
     partial void OnFullNameChanging(string value);
     partial void OnFullNameChanged();
-    partial void OnStatusChanging(string value);
+    partial void OnRoleChanging(int value);
+    partial void OnRoleChanged();
+    partial void OnStatusChanging(int value);
     partial void OnStatusChanged();
     #endregion
 		
 		public User_Log()
 		{
 			this._User_Activities = new EntitySet<User_Activity>(new Action<User_Activity>(this.attach_User_Activities), new Action<User_Activity>(this.detach_User_Activities));
+			this._User_Role = default(EntityRef<User_Role>);
+			this._User_Status = default(EntityRef<User_Status>);
 			OnCreated();
 		}
 		
@@ -2097,26 +2125,6 @@ namespace QLBN_COVID.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Role", DbType="Int NOT NULL")]
-		public int Role
-		{
-			get
-			{
-				return this._Role;
-			}
-			set
-			{
-				if ((this._Role != value))
-				{
-					this.OnRoleChanging(value);
-					this.SendPropertyChanging();
-					this._Role = value;
-					this.SendPropertyChanged("Role");
-					this.OnRoleChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string FullName
 		{
@@ -2137,8 +2145,32 @@ namespace QLBN_COVID.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Role", DbType="Int NOT NULL")]
+		public int Role
+		{
+			get
+			{
+				return this._Role;
+			}
+			set
+			{
+				if ((this._Role != value))
+				{
+					if (this._User_Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleChanging(value);
+					this.SendPropertyChanging();
+					this._Role = value;
+					this.SendPropertyChanged("Role");
+					this.OnRoleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int NOT NULL")]
+		public int Status
 		{
 			get
 			{
@@ -2148,6 +2180,10 @@ namespace QLBN_COVID.DB
 			{
 				if ((this._Status != value))
 				{
+					if (this._User_Status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnStatusChanging(value);
 					this.SendPropertyChanging();
 					this._Status = value;
@@ -2167,6 +2203,74 @@ namespace QLBN_COVID.DB
 			set
 			{
 				this._User_Activities.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Role_User_Log", Storage="_User_Role", ThisKey="Role", OtherKey="IDRole", IsForeignKey=true)]
+		public User_Role User_Role
+		{
+			get
+			{
+				return this._User_Role.Entity;
+			}
+			set
+			{
+				User_Role previousValue = this._User_Role.Entity;
+				if (((previousValue != value) 
+							|| (this._User_Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User_Role.Entity = null;
+						previousValue.User_Logs.Remove(this);
+					}
+					this._User_Role.Entity = value;
+					if ((value != null))
+					{
+						value.User_Logs.Add(this);
+						this._Role = value.IDRole;
+					}
+					else
+					{
+						this._Role = default(int);
+					}
+					this.SendPropertyChanged("User_Role");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Status_User_Log", Storage="_User_Status", ThisKey="Status", OtherKey="IDStatus", IsForeignKey=true)]
+		public User_Status User_Status
+		{
+			get
+			{
+				return this._User_Status.Entity;
+			}
+			set
+			{
+				User_Status previousValue = this._User_Status.Entity;
+				if (((previousValue != value) 
+							|| (this._User_Status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User_Status.Entity = null;
+						previousValue.User_Logs.Remove(this);
+					}
+					this._User_Status.Entity = value;
+					if ((value != null))
+					{
+						value.User_Logs.Add(this);
+						this._Status = value.IDStatus;
+					}
+					else
+					{
+						this._Status = default(int);
+					}
+					this.SendPropertyChanged("User_Status");
+				}
 			}
 		}
 		
@@ -2200,6 +2304,234 @@ namespace QLBN_COVID.DB
 		{
 			this.SendPropertyChanging();
 			entity.User_Log = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.User_Role")]
+	public partial class User_Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDRole;
+		
+		private string _Rolename;
+		
+		private EntitySet<User_Log> _User_Logs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDRoleChanging(int value);
+    partial void OnIDRoleChanged();
+    partial void OnRolenameChanging(string value);
+    partial void OnRolenameChanged();
+    #endregion
+		
+		public User_Role()
+		{
+			this._User_Logs = new EntitySet<User_Log>(new Action<User_Log>(this.attach_User_Logs), new Action<User_Log>(this.detach_User_Logs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDRole", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDRole
+		{
+			get
+			{
+				return this._IDRole;
+			}
+			set
+			{
+				if ((this._IDRole != value))
+				{
+					this.OnIDRoleChanging(value);
+					this.SendPropertyChanging();
+					this._IDRole = value;
+					this.SendPropertyChanged("IDRole");
+					this.OnIDRoleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rolename", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Rolename
+		{
+			get
+			{
+				return this._Rolename;
+			}
+			set
+			{
+				if ((this._Rolename != value))
+				{
+					this.OnRolenameChanging(value);
+					this.SendPropertyChanging();
+					this._Rolename = value;
+					this.SendPropertyChanged("Rolename");
+					this.OnRolenameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Role_User_Log", Storage="_User_Logs", ThisKey="IDRole", OtherKey="Role")]
+		public EntitySet<User_Log> User_Logs
+		{
+			get
+			{
+				return this._User_Logs;
+			}
+			set
+			{
+				this._User_Logs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_User_Logs(User_Log entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Role = this;
+		}
+		
+		private void detach_User_Logs(User_Log entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Role = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.User_Status")]
+	public partial class User_Status : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDStatus;
+		
+		private string _Statusname;
+		
+		private EntitySet<User_Log> _User_Logs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDStatusChanging(int value);
+    partial void OnIDStatusChanged();
+    partial void OnStatusnameChanging(string value);
+    partial void OnStatusnameChanged();
+    #endregion
+		
+		public User_Status()
+		{
+			this._User_Logs = new EntitySet<User_Log>(new Action<User_Log>(this.attach_User_Logs), new Action<User_Log>(this.detach_User_Logs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStatus", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDStatus
+		{
+			get
+			{
+				return this._IDStatus;
+			}
+			set
+			{
+				if ((this._IDStatus != value))
+				{
+					this.OnIDStatusChanging(value);
+					this.SendPropertyChanging();
+					this._IDStatus = value;
+					this.SendPropertyChanged("IDStatus");
+					this.OnIDStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Statusname", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Statusname
+		{
+			get
+			{
+				return this._Statusname;
+			}
+			set
+			{
+				if ((this._Statusname != value))
+				{
+					this.OnStatusnameChanging(value);
+					this.SendPropertyChanging();
+					this._Statusname = value;
+					this.SendPropertyChanged("Statusname");
+					this.OnStatusnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Status_User_Log", Storage="_User_Logs", ThisKey="IDStatus", OtherKey="Status")]
+		public EntitySet<User_Log> User_Logs
+		{
+			get
+			{
+				return this._User_Logs;
+			}
+			set
+			{
+				this._User_Logs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_User_Logs(User_Log entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Status = this;
+		}
+		
+		private void detach_User_Logs(User_Log entity)
+		{
+			this.SendPropertyChanging();
+			entity.User_Status = null;
 		}
 	}
 }

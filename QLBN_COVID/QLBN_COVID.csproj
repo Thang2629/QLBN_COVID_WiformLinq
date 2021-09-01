@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\Covid.cs">
+      <DependentUpon>Covid.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DB\Covid.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

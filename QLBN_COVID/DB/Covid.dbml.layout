@@ -1,135 +1,161 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 9.125" name="Covid">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 10.75" name="Covid">
   <DataContextMoniker Name="/CovidDataContext" />
   <nestedChildShapes>
-    <classShape Id="f75eac6a-0222-49d1-9542-4a243ed44d7c" absoluteBounds="3.5, 3.5, 2, 1.7708968098958331">
+    <classShape Id="f45a413a-4540-4ccc-8fea-1d64399789c1" absoluteBounds="3.5, 3.5, 2, 1.7708968098958331">
       <DataClassMoniker Name="/CovidDataContext/Address" />
       <nestedChildShapes>
-        <elementListCompartment Id="6f9c892b-6d65-414b-86d4-7a24e727a8ce" absoluteBounds="3.515, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4f49d9cb-7a06-4731-a6a6-c9a3d7452f64" absoluteBounds="3.515, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d5b1aeee-ea04-49f9-949b-bc03704d5920" absoluteBounds="0.75, 3.75, 2, 1.1939925130208331">
+    <classShape Id="c22c58c0-ca08-4728-9e7d-ac219a72b291" absoluteBounds="0.75, 3.75, 2, 1.1939925130208331">
       <DataClassMoniker Name="/CovidDataContext/Ward" />
       <nestedChildShapes>
-        <elementListCompartment Id="e4b5fdbe-f632-4bfb-938a-e6854dc8e7ce" absoluteBounds="0.765, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9f7120d9-3e0a-4e72-bea9-956e9bccfdc4" absoluteBounds="0.765, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="49910de7-0059-4904-883b-e1dafcf2dc27" absoluteBounds="0.75, 1.75, 2, 1.1939925130208335">
+    <classShape Id="a279fce3-38ee-4822-8e3c-e16119d60846" absoluteBounds="0.75, 1.75, 2, 1.1939925130208335">
       <DataClassMoniker Name="/CovidDataContext/City" />
       <nestedChildShapes>
-        <elementListCompartment Id="81e6e6ef-3b99-4bc5-8764-7a04b779b924" absoluteBounds="0.765, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="96d12885-ef86-493f-a466-f6ef7b30b448" absoluteBounds="0.765, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f47e1eba-5090-4107-a48d-d72b71f486f6" absoluteBounds="0.75, 5.75, 2, 1.1939925130208327">
+    <classShape Id="180da1ca-2dd1-4976-b442-27f04d14521f" absoluteBounds="0.75, 5.75, 2, 1.1939925130208327">
       <DataClassMoniker Name="/CovidDataContext/District" />
       <nestedChildShapes>
-        <elementListCompartment Id="b3275d7e-5189-41de-a4e1-7a59e50c79c0" absoluteBounds="0.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4d04092c-54de-4bf3-91b7-162d8ac33541" absoluteBounds="0.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9be297c8-5415-4950-a0a8-337432a66f12" absoluteBounds="11.75, 3.5, 2, 1.7708968098958322">
+    <classShape Id="d83061c9-8225-47f0-ab3e-c891eb68be95" absoluteBounds="11.75, 3.5, 2, 1.7708968098958322">
       <DataClassMoniker Name="/CovidDataContext/History_Treatment" />
       <nestedChildShapes>
-        <elementListCompartment Id="f3617022-a136-48b0-9fe3-edf4537c76ee" absoluteBounds="11.765, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1d6f3040-e53b-4172-a802-1a990a56e1e8" absoluteBounds="11.765, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a773f44f-6b88-40bf-88a6-86593979d3fb" absoluteBounds="9, 3.25, 2, 2.1554996744791675">
+    <classShape Id="145af4b8-ae1a-468b-a13d-d11a7344a557" absoluteBounds="9, 3.25, 2, 2.1554996744791675">
       <DataClassMoniker Name="/CovidDataContext/Patient" />
       <nestedChildShapes>
-        <elementListCompartment Id="3a7ca720-a5a2-415d-9018-65fbbacbe68a" absoluteBounds="9.015, 3.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a1c1a6c4-026b-466d-a169-b6e8a4a4aa4d" absoluteBounds="9.015, 3.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5ff942d1-45d0-4d92-98de-e3ebaa130304" absoluteBounds="6.25, 3.5, 2, 1.7708968098958331">
+    <classShape Id="4fb4b2e3-6c28-4936-8a8d-cb78ee0e75c8" absoluteBounds="6.25, 3.5, 2, 1.7708968098958331">
       <DataClassMoniker Name="/CovidDataContext/Place_Of_Treatment" />
       <nestedChildShapes>
-        <elementListCompartment Id="a8b05fe0-1ada-4b4a-befc-e8f8e3decc82" absoluteBounds="6.265, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="41b883a7-b4ce-481c-8419-f5ceb42c42d1" absoluteBounds="6.265, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8c85df77-4c2e-4c02-8526-4a09f91f011f" absoluteBounds="6.25, 0.75, 2, 1.1939925130208335">
+    <classShape Id="c9d35857-2162-4533-b325-ee0ddf0e1473" absoluteBounds="6.25, 0.75, 2, 1.1939925130208335">
       <DataClassMoniker Name="/CovidDataContext/Status" />
       <nestedChildShapes>
-        <elementListCompartment Id="1f8a1b4d-f052-47f2-948f-cec5994290e0" absoluteBounds="6.265, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="84e69033-d48e-47d6-bcd4-39c6878a8049" absoluteBounds="6.265, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fc0839e2-1bac-454a-9dff-74edb85e181c" absoluteBounds="6.5, 7.125, 2, 1.5785953776041666">
+    <classShape Id="a0fac46d-1be7-42bb-ad57-c3dd54e01658" absoluteBounds="9.25, 7.125, 2, 1.5785953776041666">
       <DataClassMoniker Name="/CovidDataContext/User_Activity" />
       <nestedChildShapes>
-        <elementListCompartment Id="d1b3ab56-9ae2-451c-825c-93f468d36e82" absoluteBounds="6.515, 7.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a9b288f7-1ee2-4bcb-97d6-ea4c3acb9107" absoluteBounds="9.265, 7.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c38f8abe-138b-401b-bb9f-994114ab1c67" absoluteBounds="3.75, 6.875, 2, 1.9631982421875005">
+    <classShape Id="812c842e-49ba-44b9-8107-b6e04e0e0331" absoluteBounds="6.5, 6.875, 2, 1.9631982421875005">
       <DataClassMoniker Name="/CovidDataContext/User_Log" />
       <nestedChildShapes>
-        <elementListCompartment Id="22614bdc-c952-43f5-9e70-42d0f443db76" absoluteBounds="3.765, 7.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e30f0ffb-4534-4e87-80f6-09c5ad02de7c" absoluteBounds="6.515, 7.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 4.34699625651042); (3.5 : 4.34699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="bd7ca523-2240-41ca-b4f0-a4044668cd02" absoluteBounds="3.75, 7.25, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/CovidDataContext/User_Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="32104941-c028-4b5c-a5fe-2fdcfdf228c3" absoluteBounds="3.765, 7.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c66468de-86cf-4d45-abd7-6e0aa6ca7aed" absoluteBounds="3.75, 9.25, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/CovidDataContext/User_Status" />
+      <nestedChildShapes>
+        <elementListCompartment Id="595b64fd-98f9-4c99-9ec6-142735270cc7" absoluteBounds="3.765, 9.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.34699625651042); (3.5 : 4.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/Ward/Ward_Address" />
       <nodes>
-        <classShapeMoniker Id="d5b1aeee-ea04-49f9-949b-bc03704d5920" />
-        <classShapeMoniker Id="f75eac6a-0222-49d1-9542-4a243ed44d7c" />
+        <classShapeMoniker Id="c22c58c0-ca08-4728-9e7d-ac219a72b291" />
+        <classShapeMoniker Id="f45a413a-4540-4ccc-8fea-1d64399789c1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.34699625651042); (4.5 : 2.34699625651042); (4.5 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 2.34699625651042); (4.5 : 2.34699625651042); (4.5 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/City/City_Address" />
       <nodes>
-        <classShapeMoniker Id="49910de7-0059-4904-883b-e1dafcf2dc27" />
-        <classShapeMoniker Id="f75eac6a-0222-49d1-9542-4a243ed44d7c" />
+        <classShapeMoniker Id="a279fce3-38ee-4822-8e3c-e16119d60846" />
+        <classShapeMoniker Id="f45a413a-4540-4ccc-8fea-1d64399789c1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.28125); (3.59375 : 6.28125); (3.59375 : 5.27089680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.34699625651042); (4.5 : 6.34699625651042); (4.5 : 5.27089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/District/District_Address" />
       <nodes>
-        <classShapeMoniker Id="f47e1eba-5090-4107-a48d-d72b71f486f6" />
-        <classShapeMoniker Id="f75eac6a-0222-49d1-9542-4a243ed44d7c" />
+        <classShapeMoniker Id="180da1ca-2dd1-4976-b442-27f04d14521f" />
+        <classShapeMoniker Id="f45a413a-4540-4ccc-8fea-1d64399789c1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 4.38544840494792); (11.75 : 4.38544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(11 : 4.38544840494792); (11.75 : 4.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/Patient/Patient_History_Treatment" />
       <nodes>
-        <classShapeMoniker Id="a773f44f-6b88-40bf-88a6-86593979d3fb" />
-        <classShapeMoniker Id="9be297c8-5415-4950-a0a8-337432a66f12" />
+        <classShapeMoniker Id="145af4b8-ae1a-468b-a13d-d11a7344a557" />
+        <classShapeMoniker Id="d83061c9-8225-47f0-ab3e-c891eb68be95" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 5.27089680989583); (5.875 : 5.64589680989583); (5.875 : 5.78049967447917); (8.625 : 5.78049967447917); (9 : 5.40549967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CovidDataContext/Address/Address_Patient" />
       <nodes>
-        <classShapeMoniker Id="f75eac6a-0222-49d1-9542-4a243ed44d7c" />
-        <classShapeMoniker Id="a773f44f-6b88-40bf-88a6-86593979d3fb" />
+        <classShapeMoniker Id="f45a413a-4540-4ccc-8fea-1d64399789c1" />
+        <classShapeMoniker Id="145af4b8-ae1a-468b-a13d-d11a7344a557" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 4.38544840494792); (9 : 4.38544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.25 : 4.38544840494792); (9 : 4.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/Place_Of_Treatment/Place_Of_Treatment_Patient" />
       <nodes>
-        <classShapeMoniker Id="5ff942d1-45d0-4d92-98de-e3ebaa130304" />
-        <classShapeMoniker Id="a773f44f-6b88-40bf-88a6-86593979d3fb" />
+        <classShapeMoniker Id="4fb4b2e3-6c28-4936-8a8d-cb78ee0e75c8" />
+        <classShapeMoniker Id="145af4b8-ae1a-468b-a13d-d11a7344a557" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.35419590494792); (6.25 : 4.35419590494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 4.35419590494792); (6.25 : 4.35419590494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/Address/Address_Place_Of_Treatment" />
       <nodes>
-        <classShapeMoniker Id="f75eac6a-0222-49d1-9542-4a243ed44d7c" />
-        <classShapeMoniker Id="5ff942d1-45d0-4d92-98de-e3ebaa130304" />
+        <classShapeMoniker Id="f45a413a-4540-4ccc-8fea-1d64399789c1" />
+        <classShapeMoniker Id="4fb4b2e3-6c28-4936-8a8d-cb78ee0e75c8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 1.34699625651042); (12.75 : 1.34699625651042); (12.75 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.25 : 1.34699625651042); (12.75 : 1.34699625651042); (12.75 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/Status/Status_History_Treatment" />
       <nodes>
-        <classShapeMoniker Id="8c85df77-4c2e-4c02-8526-4a09f91f011f" />
-        <classShapeMoniker Id="9be297c8-5415-4950-a0a8-337432a66f12" />
+        <classShapeMoniker Id="c9d35857-2162-4533-b325-ee0ddf0e1473" />
+        <classShapeMoniker Id="d83061c9-8225-47f0-ab3e-c891eb68be95" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 1.67674688476563); (10 : 1.67674688476563); (10 : 3.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.25 : 1.67674688476563); (10 : 1.67674688476563); (10 : 3.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/Status/Status_Patient" />
       <nodes>
-        <classShapeMoniker Id="8c85df77-4c2e-4c02-8526-4a09f91f011f" />
-        <classShapeMoniker Id="a773f44f-6b88-40bf-88a6-86593979d3fb" />
+        <classShapeMoniker Id="c9d35857-2162-4533-b325-ee0ddf0e1473" />
+        <classShapeMoniker Id="145af4b8-ae1a-468b-a13d-d11a7344a557" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 7.91429768880208); (6.5 : 7.91429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.5 : 7.91429768880208); (9.25 : 7.91429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CovidDataContext/User_Log/User_Log_User_Activity" />
       <nodes>
-        <classShapeMoniker Id="c38f8abe-138b-401b-bb9f-994114ab1c67" />
-        <classShapeMoniker Id="fc0839e2-1bac-454a-9dff-74edb85e181c" />
+        <classShapeMoniker Id="812c842e-49ba-44b9-8107-b6e04e0e0331" />
+        <classShapeMoniker Id="a0fac46d-1be7-42bb-ad57-c3dd54e01658" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 7.84699625651042); (6.5 : 7.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CovidDataContext/User_Role/User_Role_User_Log" />
+      <nodes>
+        <classShapeMoniker Id="bd7ca523-2240-41ca-b4f0-a4044668cd02" />
+        <classShapeMoniker Id="812c842e-49ba-44b9-8107-b6e04e0e0331" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 9.84699625651042); (7.5 : 9.84699625651042); (7.5 : 8.8381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CovidDataContext/User_Status/User_Status_User_Log" />
+      <nodes>
+        <classShapeMoniker Id="c66468de-86cf-4d45-abd7-6e0aa6ca7aed" />
+        <classShapeMoniker Id="812c842e-49ba-44b9-8107-b6e04e0e0331" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
