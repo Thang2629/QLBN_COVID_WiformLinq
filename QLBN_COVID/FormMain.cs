@@ -107,5 +107,11 @@ namespace QLBN_COVID
             var f = new FormNoiDieuTri();
             addForm(f);
         }
+
+        private void userToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new FormUser();
+            addForm(f);
+        }
     }
 }

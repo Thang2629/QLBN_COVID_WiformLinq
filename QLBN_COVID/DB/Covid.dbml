@@ -63,7 +63,7 @@
   </Table>
   <Table Name="dbo.Place_Of_Treatment" Member="Place_Of_Treatments">
     <Type Name="Place_Of_Treatment">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IDAddress" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="Capacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -94,10 +94,26 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FullName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="User_Log_User_Activity" Member="User_Activities" ThisKey="ID" OtherKey="UserID" Type="User_Activity" />
+      <Association Name="User_Role_User_Log" Member="User_Role" ThisKey="Role" OtherKey="IDRole" Type="User_Role" IsForeignKey="true" />
+      <Association Name="User_Status_User_Log" Member="User_Status" ThisKey="Status" OtherKey="IDStatus" Type="User_Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.User_Role" Member="User_Roles">
+    <Type Name="User_Role">
+      <Column Name="IDRole" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Rolename" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Role_User_Log" Member="User_Logs" ThisKey="IDRole" OtherKey="Role" Type="User_Log" />
+    </Type>
+  </Table>
+  <Table Name="dbo.User_Status" Member="User_Status">
+    <Type Name="User_Status">
+      <Column Name="IDStatus" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Statusname" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Status_User_Log" Member="User_Logs" ThisKey="IDStatus" OtherKey="Status" Type="User_Log" />
     </Type>
   </Table>
 </Database>
