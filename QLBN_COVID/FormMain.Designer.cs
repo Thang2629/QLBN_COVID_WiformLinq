@@ -29,7 +29,6 @@ namespace QLBN_COVID
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.ptbMinimize = new System.Windows.Forms.PictureBox();
             this.ptbResize = new System.Windows.Forms.PictureBox();
@@ -74,7 +73,7 @@ namespace QLBN_COVID
             // ptbMinimize
             // 
             this.ptbMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptbMinimize.Image = ((System.Drawing.Image)(resources.GetObject("ptbMinimize.Image")));
+            this.ptbMinimize.Image = global::QLBN_COVID.Properties.Resources.minimazar;
             this.ptbMinimize.Location = new System.Drawing.Point(794, 3);
             this.ptbMinimize.Name = "ptbMinimize";
             this.ptbMinimize.Size = new System.Drawing.Size(21, 21);
@@ -86,7 +85,7 @@ namespace QLBN_COVID
             // ptbResize
             // 
             this.ptbResize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptbResize.Image = ((System.Drawing.Image)(resources.GetObject("ptbResize.Image")));
+            this.ptbResize.Image = global::QLBN_COVID.Properties.Resources.res;
             this.ptbResize.Location = new System.Drawing.Point(832, 5);
             this.ptbResize.Name = "ptbResize";
             this.ptbResize.Size = new System.Drawing.Size(21, 21);
@@ -98,7 +97,7 @@ namespace QLBN_COVID
             // ptbClose
             // 
             this.ptbClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ptbClose.Image = ((System.Drawing.Image)(resources.GetObject("ptbClose.Image")));
+            this.ptbClose.Image = global::QLBN_COVID.Properties.Resources.cerrar;
             this.ptbClose.Location = new System.Drawing.Point(868, 4);
             this.ptbClose.Name = "ptbClose";
             this.ptbClose.Size = new System.Drawing.Size(21, 21);
@@ -161,27 +160,27 @@ namespace QLBN_COVID
             this.placeOfTreatmentToolStripMenuItem,
             this.userToolStripMenuItem});
             this.danhMụcToolStripMenuItem.Name = "danhMụcToolStripMenuItem";
-            this.danhMụcToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.danhMụcToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.danhMụcToolStripMenuItem.Text = "Danh mục";
             // 
             // PatientToolStripMenuItem
             // 
             this.PatientToolStripMenuItem.Name = "PatientToolStripMenuItem";
-            this.PatientToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PatientToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.PatientToolStripMenuItem.Text = "Bệnh nhân";
             this.PatientToolStripMenuItem.Click += new System.EventHandler(this.PatientToolStripMenuItem_Click);
             // 
             // placeOfTreatmentToolStripMenuItem
             // 
             this.placeOfTreatmentToolStripMenuItem.Name = "placeOfTreatmentToolStripMenuItem";
-            this.placeOfTreatmentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.placeOfTreatmentToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.placeOfTreatmentToolStripMenuItem.Text = "Nơi điều trị";
             this.placeOfTreatmentToolStripMenuItem.Click += new System.EventHandler(this.placeOfTreatmentToolStripMenuItem_Click);
             // 
             // userToolStripMenuItem
             // 
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.userToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.userToolStripMenuItem.Text = "User";
             this.userToolStripMenuItem.Click += new System.EventHandler(this.userToolStripMenuItem_Click);
             // 
@@ -221,7 +220,7 @@ namespace QLBN_COVID
             // 
             // ptbAccount
             // 
-            this.ptbAccount.Image = ((System.Drawing.Image)(resources.GetObject("ptbAccount.Image")));
+            this.ptbAccount.Image = global::QLBN_COVID.Properties.Resources.account;
             this.ptbAccount.Location = new System.Drawing.Point(224, 38);
             this.ptbAccount.Name = "ptbAccount";
             this.ptbAccount.Size = new System.Drawing.Size(17, 17);
@@ -232,7 +231,7 @@ namespace QLBN_COVID
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::QLBN_COVID.Properties.Resources.logout;
             this.pictureBox1.Location = new System.Drawing.Point(863, 38);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(18, 18);
@@ -245,7 +244,7 @@ namespace QLBN_COVID
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::QLBN_COVID.Properties.Resources.photo_1557683316_973673baf926;
             this.ClientSize = new System.Drawing.Size(900, 600);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ptbAccount);

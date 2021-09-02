@@ -91,7 +91,7 @@ namespace QLBN_COVID
             }
             else
             {
-                MessageBox.Show("Vui lòng kiểm tra tài khoản và mật khẩu", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng kiểm tra lại tài khoản, mật khẩu hoặc mã xác nhận", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtUser.Select();
                 return;
             }
@@ -105,6 +105,11 @@ namespace QLBN_COVID
             Application.Exit();
         }
 
-       
+        private void linkRegistry_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormDangKy f = new FormDangKy();
+            f.Show();
+            linkRegistry.LinkVisited = true;
+        }
     }
 }

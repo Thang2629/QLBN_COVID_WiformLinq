@@ -34,14 +34,14 @@ namespace QLBN_COVID
             this.dataPlaceOfTreatment = new System.Windows.Forms.DataGridView();
             this.txtPlace = new System.Windows.Forms.TextBox();
             this.lblPlace = new System.Windows.Forms.Label();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.txtCapacity = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.txtCurrentNumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxCity = new System.Windows.Forms.ComboBox();
             this.lblCity = new System.Windows.Forms.Label();
             this.lblDistrict = new System.Windows.Forms.Label();
             this.cbxDistrict = new System.Windows.Forms.ComboBox();
@@ -49,6 +49,8 @@ namespace QLBN_COVID
             this.lblWard = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.lblAddress = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataPlaceOfTreatment)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +72,7 @@ namespace QLBN_COVID
             this.dataPlaceOfTreatment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataPlaceOfTreatment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataPlaceOfTreatment.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataPlaceOfTreatment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataPlaceOfTreatment.GridColor = System.Drawing.SystemColors.ControlLightLight;
@@ -77,6 +80,7 @@ namespace QLBN_COVID
             this.dataPlaceOfTreatment.Name = "dataPlaceOfTreatment";
             this.dataPlaceOfTreatment.Size = new System.Drawing.Size(800, 168);
             this.dataPlaceOfTreatment.TabIndex = 4;
+            this.dataPlaceOfTreatment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataPlaceOfTreatment_CellClick);
             // 
             // txtPlace
             // 
@@ -101,15 +105,15 @@ namespace QLBN_COVID
             this.lblPlace.TabIndex = 5;
             this.lblPlace.Text = "Tên nơi điều trị:";
             // 
-            // txtQuantity
+            // txtCapacity
             // 
-            this.txtQuantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtQuantity.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuantity.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtQuantity.Location = new System.Drawing.Point(427, 100);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(78, 22);
-            this.txtQuantity.TabIndex = 8;
+            this.txtCapacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCapacity.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCapacity.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtCapacity.Location = new System.Drawing.Point(427, 100);
+            this.txtCapacity.Name = "txtCapacity";
+            this.txtCapacity.Size = new System.Drawing.Size(78, 22);
+            this.txtCapacity.TabIndex = 8;
             // 
             // label1
             // 
@@ -124,15 +128,15 @@ namespace QLBN_COVID
             this.label1.TabIndex = 7;
             this.label1.Text = "Sức chứa:";
             // 
-            // txtNumber
+            // txtCurrentNumber
             // 
-            this.txtNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNumber.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumber.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtNumber.Location = new System.Drawing.Point(665, 100);
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(83, 22);
-            this.txtNumber.TabIndex = 10;
+            this.txtCurrentNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCurrentNumber.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCurrentNumber.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtCurrentNumber.Location = new System.Drawing.Point(665, 100);
+            this.txtCurrentNumber.Name = "txtCurrentNumber";
+            this.txtCurrentNumber.Size = new System.Drawing.Size(83, 22);
+            this.txtCurrentNumber.TabIndex = 10;
             // 
             // label3
             // 
@@ -160,6 +164,7 @@ namespace QLBN_COVID
             this.btnDelete.TabIndex = 30;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -174,6 +179,7 @@ namespace QLBN_COVID
             this.btnEdit.TabIndex = 29;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -188,16 +194,17 @@ namespace QLBN_COVID
             this.btnAdd.TabIndex = 28;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // comboBox1
+            // cbxCity
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(144, 235);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 23);
-            this.comboBox1.TabIndex = 38;
+            this.cbxCity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxCity.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxCity.FormattingEnabled = true;
+            this.cbxCity.Location = new System.Drawing.Point(144, 235);
+            this.cbxCity.Name = "cbxCity";
+            this.cbxCity.Size = new System.Drawing.Size(145, 23);
+            this.cbxCity.TabIndex = 38;
             // 
             // lblCity
             // 
@@ -281,13 +288,40 @@ namespace QLBN_COVID
             this.lblAddress.TabIndex = 31;
             this.lblAddress.Text = "Địa chỉ:";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
+            this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSearch.Location = new System.Drawing.Point(237, 30);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(94, 30);
+            this.btnSearch.TabIndex = 40;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtSearch.Location = new System.Drawing.Point(32, 34);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(177, 22);
+            this.txtSearch.TabIndex = 39;
+            // 
             // FormNoiDieuTri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::QLBN_COVID.Properties.Resources.photo_1557683316_973673baf926;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.cbxCity);
             this.Controls.Add(this.lblCity);
             this.Controls.Add(this.lblDistrict);
             this.Controls.Add(this.cbxDistrict);
@@ -298,9 +332,9 @@ namespace QLBN_COVID
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtNumber);
+            this.Controls.Add(this.txtCurrentNumber);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtQuantity);
+            this.Controls.Add(this.txtCapacity);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtPlace);
             this.Controls.Add(this.lblPlace);
@@ -321,14 +355,14 @@ namespace QLBN_COVID
         private System.Windows.Forms.DataGridView dataPlaceOfTreatment;
         private System.Windows.Forms.TextBox txtPlace;
         private System.Windows.Forms.Label lblPlace;
-        private System.Windows.Forms.TextBox txtQuantity;
+        private System.Windows.Forms.TextBox txtCapacity;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.TextBox txtCurrentNumber;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxCity;
         private System.Windows.Forms.Label lblCity;
         private System.Windows.Forms.Label lblDistrict;
         private System.Windows.Forms.ComboBox cbxDistrict;
@@ -336,5 +370,7 @@ namespace QLBN_COVID
         private System.Windows.Forms.Label lblWard;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

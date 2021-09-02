@@ -22,7 +22,22 @@ namespace QLBN_COVID
         private void FormNoiDieuTri_Load(object sender, EventArgs e)
         {
             db = new CovidDataContext();
-            
+
+            cbxCity.DataSource = db.Cities;
+            cbxCity.DisplayMember = "Name_of_city";
+            cbxCity.ValueMember = "IDCity";
+            cbxCity.SelectedIndex = -1;
+
+            cbxDistrict.DataSource = db.Districts;
+            cbxDistrict.DisplayMember = "Name_of_district";
+            cbxDistrict.ValueMember = "IDDistrict";
+            cbxDistrict.SelectedIndex = -1;
+
+            cbxWard.DataSource = db.Wards;
+            cbxWard.DisplayMember = "Name_of_ward";
+            cbxWard.ValueMember = "IDWard";
+            cbxWard.SelectedIndex = -1;
+
             showData();
             dataPlaceOfTreatment.Columns["ID"].HeaderText = "ID";
             dataPlaceOfTreatment.Columns["Name"].HeaderText = "Nơi điều trị";
@@ -47,6 +62,244 @@ namespace QLBN_COVID
                          Address= a.Street + ", " + w.Name_of_ward + ", "+ d.Name_of_district + ", "+ c.Name_of_city   
                      };
             dataPlaceOfTreatment.DataSource = rs;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPlace.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên nơi điều trị", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPlace.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtCapacity.Text))
+            {
+                MessageBox.Show("Vui lòng nhập sức chứa", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCapacity.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtCurrentNumber.Text))
+            {
+                MessageBox.Show("Vui lòng nhập số lượng hiện tại", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCurrentNumber.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtAddress.Text))
+            {
+                MessageBox.Show("Vui lòng nhập địa chỉ", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAddress.Select();
+                return;
+            }
+            if (cbxCity.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (cbxDistrict.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (cbxWard.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var place = new Place_Of_Treatment();
+            place.Name = txtPlace.Text;
+            place.Capacity = int.Parse(txtCapacity.Text);
+            place.Current_Quantity = int.Parse(txtCurrentNumber.Text);
+            var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
+           a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
+           a.Street.Equals(txtAddress.Text));
+            place.IDAddress = add.IDAddress;
+            db.Place_Of_Treatments.InsertOnSubmit(place);
+            db.SubmitChanges();
+
+
+            var userAcitvity = new User_Activity();
+            userAcitvity.UserID = FormLogin.user.ID;
+            userAcitvity.Timestamp = DateTime.Now;
+            userAcitvity.Action = "Thêm nơi điều trị: " + txtPlace.Text;
+            db.User_Activities.InsertOnSubmit(userAcitvity);
+            db.SubmitChanges();
+
+            showData();
+            MessageBox.Show("Thêm mới nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            txtPlace.Text = null;
+            txtCapacity.Text = null;
+            txtCurrentNumber.Text = null;
+            txtAddress.Text = null;
+            cbxCity.SelectedIndex = -1;
+            cbxDistrict.SelectedIndex = -1;
+            cbxWard.SelectedIndex = -1;
+
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPlace.Text))
+            {
+                MessageBox.Show("Vui lòng nhập tên nơi điều trị", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPlace.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtCapacity.Text))
+            {
+                MessageBox.Show("Vui lòng nhập sức chứa", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCapacity.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtCurrentNumber.Text))
+            {
+                MessageBox.Show("Vui lòng nhập số lượng hiện tại", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCurrentNumber.Select();
+                return;
+            }
+            if (string.IsNullOrEmpty(txtAddress.Text))
+            {
+                MessageBox.Show("Vui lòng nhập địa chỉ", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAddress.Select();
+                return;
+            }
+            if (cbxCity.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (cbxDistrict.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (cbxWard.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var place = db.Place_Of_Treatments.SingleOrDefault(x => x.ID.Equals(r.Cells["ID"]));
+            place.Name = txtPlace.Text;
+            place.Capacity = int.Parse(txtCapacity.Text);
+            place.Current_Quantity = int.Parse(txtCurrentNumber.Text);
+            var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
+           a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
+           a.Street.Equals(txtAddress.Text));
+            place.IDAddress = add.IDAddress;
+            db.SubmitChanges();
+
+            showData();
+            MessageBox.Show("Sửa thông tin nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            txtPlace.Text = null;
+            txtCapacity.Text = null;
+            txtCurrentNumber.Text = null;
+            txtAddress.Text = null;
+            cbxCity.SelectedIndex = -1;
+            cbxDistrict.SelectedIndex = -1;
+            cbxWard.SelectedIndex = -1;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (r == null)
+            {
+                MessageBox.Show("Vui lòng chọn nơi điều trị cần xóa", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (
+                MessageBox.Show(
+                        "Bạn có muốn xóa nơi điều trị này: " + r.Cells["Name"].Value.ToString() + "?",
+                        "Xác nhận xóa nơi điều trị",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question
+                    ) == DialogResult.Yes
+             )
+            {
+                try
+                {
+                    var place = db.Place_Of_Treatments.SingleOrDefault(x => x.ID.Equals(r.Cells["ID"]));
+                    db.Place_Of_Treatments.DeleteOnSubmit(place);
+                    db.SubmitChanges();
+
+                    //Thêm hành động vào lịch sử hoạt động
+                    var userAcitvity = new User_Activity();
+                    userAcitvity.Action = "Xoá nơi điều trị: " + place.Name;
+                    userAcitvity.Timestamp = DateTime.Now;
+                    userAcitvity.UserID = FormLogin.user.ID;
+                    db.User_Activities.InsertOnSubmit(userAcitvity);
+
+                    db.SubmitChanges();
+                    MessageBox.Show("Xóa nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Xóa nơi điều trị thất bại", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                showData();
+
+                txtPlace.Text = null;
+                txtCapacity.Text = null;
+                txtCurrentNumber.Text = null;
+                txtAddress.Text = null;
+                cbxCity.SelectedIndex = -1;
+                cbxDistrict.SelectedIndex = -1;
+                cbxWard.SelectedIndex = -1;
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "")
+            {
+                showData();
+            }
+            var rs = from p in db.Place_Of_Treatments
+                     join a in db.Addresses on p.IDAddress equals a.IDAddress
+                     join c in db.Cities on a.IDCity equals c.IDCity
+                     join d in db.Districts on a.IDDistrict equals d.IDDistrict
+                     join w in db.Wards on a.IDWard equals w.IDWard
+                     where (p.Name == txtPlace.Text) 
+                     select new
+                     {
+                         p.ID,
+                         p.Name,
+                         p.Capacity,
+                         p.Current_Quantity,
+                         Address = a.Street + ", " + w.Name_of_ward + ", " + d.Name_of_district + ", " + c.Name_of_city
+                     };
+            if (rs != null)
+            {
+                dataPlaceOfTreatment.DataSource = rs;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy nơi điều trị", "Chú ý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSearch.Select();
+                return;
+            }
+        }
+
+        private void dataPlaceOfTreatment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataPlaceOfTreatment.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                r = dataPlaceOfTreatment.Rows[e.RowIndex];
+                dataPlaceOfTreatment.CurrentRow.Selected = true;
+                txtCapacity.Text = dataPlaceOfTreatment.Rows[e.RowIndex].Cells["Capacity"].FormattedValue.ToString();
+                txtPlace.Text = dataPlaceOfTreatment.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
+                txtCurrentNumber.Text = dataPlaceOfTreatment.Rows[e.RowIndex].Cells["Current_Quantity"].FormattedValue.ToString();
+                string address = dataPlaceOfTreatment.Rows[e.RowIndex].Cells["Address"].FormattedValue.ToString();
+                char[] delimiterChars = { ',' };
+                string[] addressList = address.Split(delimiterChars);
+                txtAddress.Text = addressList[0].Trim();
+                cbxWard.Text = addressList[1].Trim();
+                cbxDistrict.Text = addressList[2].Trim();
+                cbxCity.Text = addressList[3].Trim();
+            }
         }
     }
 }

@@ -43,6 +43,8 @@ namespace QLBN_COVID
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.ptbRefresh = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.linkRegistry = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRefresh)).BeginInit();
@@ -51,7 +53,7 @@ namespace QLBN_COVID
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
+            this.label1.Image = global::QLBN_COVID.Properties.Resources.user;
             this.label1.Location = new System.Drawing.Point(222, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 64);
@@ -178,7 +180,7 @@ namespace QLBN_COVID
             // ptbRefresh
             // 
             this.ptbRefresh.BackColor = System.Drawing.Color.Transparent;
-            this.ptbRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ptbRefresh.Image")));
+            this.ptbRefresh.Image = global::QLBN_COVID.Properties.Resources.refresh;
             this.ptbRefresh.Location = new System.Drawing.Point(351, 228);
             this.ptbRefresh.Name = "ptbRefresh";
             this.ptbRefresh.Size = new System.Drawing.Size(21, 21);
@@ -187,13 +189,42 @@ namespace QLBN_COVID
             this.ptbRefresh.TabStop = false;
             this.ptbRefresh.Click += new System.EventHandler(this.ptbRefresh_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.ForeColor = System.Drawing.SystemColors.Window;
+            this.label5.Location = new System.Drawing.Point(142, 345);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(141, 13);
+            this.label5.TabIndex = 62;
+            this.label5.Text = "Bạn chưa có tài khoản, hãy ";
+            // 
+            // linkRegistry
+            // 
+            this.linkRegistry.AutoSize = true;
+            this.linkRegistry.BackColor = System.Drawing.Color.Transparent;
+            this.linkRegistry.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.linkRegistry.LinkColor = System.Drawing.Color.White;
+            this.linkRegistry.Location = new System.Drawing.Point(279, 345);
+            this.linkRegistry.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.linkRegistry.Name = "linkRegistry";
+            this.linkRegistry.Size = new System.Drawing.Size(73, 13);
+            this.linkRegistry.TabIndex = 61;
+            this.linkRegistry.TabStop = true;
+            this.linkRegistry.Text = "Đăng ký ngay";
+            this.linkRegistry.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRegistry_LinkClicked);
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::QLBN_COVID.Properties.Resources.background_login;
             this.ClientSize = new System.Drawing.Size(522, 389);
             this.ControlBox = false;
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.linkRegistry);
             this.Controls.Add(this.ptbRefresh);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox2);
@@ -235,6 +266,8 @@ namespace QLBN_COVID
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox ptbRefresh;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.LinkLabel linkRegistry;
     }
 }
 

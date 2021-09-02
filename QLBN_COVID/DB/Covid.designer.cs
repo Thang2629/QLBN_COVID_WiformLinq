@@ -530,7 +530,12 @@ namespace QLBN_COVID.DB
 			this.SendPropertyChanging();
 			entity.Address = null;
 		}
-	}
+
+        public static implicit operator Address(int v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Ward")]
 	public partial class Ward : INotifyPropertyChanging, INotifyPropertyChanged
