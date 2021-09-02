@@ -117,11 +117,7 @@ namespace QLBN_COVID
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-           
-            if(txtCMND.Enabled == true)
-            {
-
-                
+          
             if (string.IsNullOrEmpty(txtCMND.Text))
             {
                 MessageBox.Show("Vui lòng nhập CMND", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -176,48 +172,50 @@ namespace QLBN_COVID
                 MessageBox.Show("Vui lòng chọn chọn CMND người liên quan", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var patient = new Patient();
-            patient.CMND = txtCMND.Text;
-            patient.FullName = txtFullName.Text;
-            patient.YearOfBirth = long.Parse(txtYearOfBirth.Text);
-            var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
-            a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
-            a.Street.Equals(txtAddress.Text));
-            patient.IDAddress = add.IDAddress;
-            patient.IDStatus = int.Parse(cbxStatus.SelectedValue.ToString());
-            patient.IDTreatment = int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString());
-            patient.People_Involved = cbxPeopleInvolved.SelectedValue.ToString();
-            db.Patients.InsertOnSubmit(patient);
-            db.SubmitChanges();
+                var treatment = db.Place_Of_Treatments.SingleOrDefault(x => x.ID == int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString()));
+                if (treatment.Current_Quantity - 1 < 0)
+                {
+                    MessageBox.Show("Nơi điều trị đã hết sức chứa\nXin vui lòng chọn nơi điều trị khác!", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    var patient = new Patient();
+                    patient.CMND = txtCMND.Text;
+                    patient.FullName = txtFullName.Text;
+                    patient.YearOfBirth = long.Parse(txtYearOfBirth.Text);
+                    var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
+                    a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
+                    a.Street.Equals(txtAddress.Text));
+                    patient.IDAddress = add.IDAddress;
+                    patient.IDStatus = int.Parse(cbxStatus.SelectedValue.ToString());
+                    patient.IDTreatment = int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString());
+                    patient.People_Involved = cbxPeopleInvolved.SelectedValue.ToString();
+                    db.Patients.InsertOnSubmit(patient);
+                    db.SubmitChanges();
+                    //cập nhật só lượng hiện tại cho nơi điều trị
+                    treatment.Current_Quantity = treatment.Current_Quantity - 1;
+                    db.SubmitChanges();
 
-             var treatment = db.Place_Of_Treatments.SingleOrDefault(x => x.ID == int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString()));
-                treatment.Current_Quantity = treatment.Current_Quantity - 1;
-                db.SubmitChanges();
+                    var userAcitvity = new User_Activity();
+                    userAcitvity.UserID = FormLogin.user.ID;
+                    userAcitvity.Timestamp = DateTime.Now;
+                    userAcitvity.Action = "Thêm Bệnh nhân: " + txtFullName.Text;
+                    db.User_Activities.InsertOnSubmit(userAcitvity);
+                    db.SubmitChanges();
+                showData();
+                MessageBox.Show("Thêm mới bệnh nhân thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            var userAcitvity = new User_Activity();
-            userAcitvity.UserID = FormLogin.user.ID;
-            userAcitvity.Timestamp = DateTime.Now;
-            userAcitvity.Action = "Thêm Bệnh nhân: " + txtFullName.Text;
-            db.User_Activities.InsertOnSubmit(userAcitvity);
-            db.SubmitChanges();
-
-            showData();
-            MessageBox.Show("Thêm mới bệnh nhân thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            txtCMND.Text = null;
-            txtFullName.Text = null;
-            txtYearOfBirth.Text = null;
-            txtAddress.Text = null;
-            cbxCity.SelectedIndex = -1;
-            cbxDistrict.SelectedIndex = -1;
-            cbxWard.SelectedIndex = -1;
-            cbxStatus.SelectedIndex = -1;
-            cbxPlaceOfTreatment.SelectedIndex = -1;
-            cbxPeopleInvolved.SelectedIndex = -1;
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng ấn nút Thêm trước ", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCMND.Text = null;
+                txtFullName.Text = null;
+                txtYearOfBirth.Text = null;
+                txtAddress.Text = null;
+                cbxCity.SelectedIndex = -1;
+                cbxDistrict.SelectedIndex = -1;
+                cbxWard.SelectedIndex = -1;
+                cbxStatus.SelectedIndex = -1;
+                cbxPlaceOfTreatment.SelectedIndex = -1;
+                cbxPeopleInvolved.SelectedIndex = -1;
             }
         }
 
@@ -277,60 +275,69 @@ namespace QLBN_COVID
                 MessageBox.Show("Vui lòng chọn chọn CMND người liên quan", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            var patient = db.Patients.SingleOrDefault(x => x.CMND.Equals(txtCMND.Text));
-            patient.CMND = txtCMND.Text;
-            patient.FullName = txtFullName.Text;
-            patient.YearOfBirth = long.Parse(txtYearOfBirth.Text);
-            var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
-            a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
-            a.Street.Equals(txtAddress.Text));
-            patient.IDAddress = add.IDAddress;
-            patient.IDStatus = int.Parse(cbxStatus.SelectedValue.ToString());
-            patient.IDTreatment = int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString());
-            patient.People_Involved = cbxPeopleInvolved.SelectedValue.ToString();
-            db.SubmitChanges();
-
-            //Thêm hành động vào lịch sử hoạt động
-            var userAcitvity = new User_Activity();
-            userAcitvity.Action = "Sửa thông tin bệnh nhân: " + txtFullName.Text;
-            userAcitvity.Timestamp = DateTime.Now;
-            userAcitvity.UserID = FormLogin.user.ID;
-            db.User_Activities.InsertOnSubmit(userAcitvity);
-            db.SubmitChanges();
-
-            //Thêm vào lịch sử điều trị - TODO
-            var p = db.Patients.SingleOrDefault(h => h.CMND.Equals(r.Cells["CMND"].Value.ToString()));
-            var status = db.Status.SingleOrDefault(s => s.Kind_Of_Status.Equals(r.Cells["Status"].Value.ToString()));
-            var treatment = db.Place_Of_Treatments.SingleOrDefault(s => s.Name.Equals(r.Cells["Name"].Value.ToString()));
-            var history = new History_Treatment();
-            if (p.IDStatus != status.IDStatus)
+            var treatment = db.Place_Of_Treatments.SingleOrDefault(x => x.ID == int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString()));
+            if (treatment.Current_Quantity - 1 < 0)
             {
-                history.IDStatus = p.IDStatus;
+                MessageBox.Show("Nơi điều trị đã hết sức chứa\nXin vui lòng chọn nơi điều trị khác!", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            if(p.IDTreatment != treatment.ID)
+            else
             {
-                history.IDTreatment = p.IDTreatment;
-            }    
+                var patient = db.Patients.SingleOrDefault(x => x.CMND.Equals(txtCMND.Text));
+                patient.CMND = txtCMND.Text;
+                patient.FullName = txtFullName.Text;
+                patient.YearOfBirth = long.Parse(txtYearOfBirth.Text);
+                var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
+                a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
+                a.Street.Equals(txtAddress.Text));
+                patient.IDAddress = add.IDAddress;
+                patient.IDStatus = int.Parse(cbxStatus.SelectedValue.ToString());
+                patient.IDTreatment = int.Parse(cbxPlaceOfTreatment.SelectedValue.ToString());
+                patient.People_Involved = cbxPeopleInvolved.SelectedValue.ToString();
+                db.SubmitChanges();
+
+                //Thêm hành động vào lịch sử hoạt động
+                var userAcitvity = new User_Activity();
+                userAcitvity.Action = "Sửa thông tin bệnh nhân: " + txtFullName.Text;
+                userAcitvity.Timestamp = DateTime.Now;
+                userAcitvity.UserID = FormLogin.user.ID;
+                db.User_Activities.InsertOnSubmit(userAcitvity);
+                db.SubmitChanges();
+
+                //Thêm vào lịch sử điều trị - TODO
+                var p = db.Patients.SingleOrDefault(h => h.CMND.Equals(r.Cells["CMND"].Value.ToString()));
+                var status = db.Status.SingleOrDefault(s => s.Kind_Of_Status.Equals(r.Cells["Status"].Value.ToString()));
+                var t = db.Place_Of_Treatments.SingleOrDefault(s => s.Name.Equals(r.Cells["Name"].Value.ToString()));
+                var history = new History_Treatment();
+                if (p.IDStatus != status.IDStatus)
+                {
+                    history.IDStatus = p.IDStatus;
+                }
+                if (p.IDTreatment != t.ID)
+                {
+                    history.IDTreatment = p.IDTreatment;
+                }
 
 
-            showData();
-            MessageBox.Show("Sửa thông tin bệnh nhân thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                showData();
+                MessageBox.Show("Sửa thông tin bệnh nhân thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            txtCMND.Text = null;
-            txtFullName.Text = null;
-            txtYearOfBirth.Text = null;
-            txtAddress.Text = null;
-            cbxCity.SelectedIndex = -1;
-            cbxDistrict.SelectedIndex = -1;
-            cbxWard.SelectedIndex = -1;
-            cbxStatus.SelectedIndex = -1;
-            cbxPlaceOfTreatment.SelectedIndex = -1;
-            cbxPeopleInvolved.SelectedIndex = -1;
-        }
+                txtCMND.Text = null;
+                txtFullName.Text = null;
+                txtYearOfBirth.Text = null;
+                txtAddress.Text = null;
+                cbxCity.SelectedIndex = -1;
+                cbxDistrict.SelectedIndex = -1;
+                cbxWard.SelectedIndex = -1;
+                cbxStatus.SelectedIndex = -1;
+                cbxPlaceOfTreatment.SelectedIndex = -1;
+                cbxPeopleInvolved.SelectedIndex = -1;
 
-        private void btnDelete_Click(object sender, EventArgs e)
+            }
+            }
+
+            private void btnDelete_Click(object sender, EventArgs e)
         {
             if (r == null)
             {
