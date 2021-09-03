@@ -105,28 +105,65 @@ namespace QLBN_COVID
                 MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            try
+            {
+                var newplace = new Place_Of_Treatment();
+                var place = db.Place_Of_Treatments.SingleOrDefault(x => x.Name.Equals(txtPlace.Text));
+                if(place != null)
+                {
+                    MessageBox.Show("Tên cơ sở điều trị này đã tồn tại", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
+                  a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
+                  a.Street.Equals(txtAddress.Text));
+                    if (add != null)
+                    {
+                        MessageBox.Show("Địa chỉ này đã tồn tại", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else
+                    {
+                        newplace.Name = txtPlace.Text;
+                        newplace.Capacity = int.Parse(txtCapacity.Text);
+                        newplace.Current_Quantity = int.Parse(txtCurrentNumber.Text);
 
-            var place = new Place_Of_Treatment();
-            place.Name = txtPlace.Text;
-            place.Capacity = int.Parse(txtCapacity.Text);
-            place.Current_Quantity = int.Parse(txtCurrentNumber.Text);
-            var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
-           a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
-           a.Street.Equals(txtAddress.Text));
-            place.IDAddress = add.IDAddress;
-            db.Place_Of_Treatments.InsertOnSubmit(place);
-            db.SubmitChanges();
 
 
-            var userAcitvity = new User_Activity();
-            userAcitvity.UserID = FormLogin.user.ID;
-            userAcitvity.Timestamp = DateTime.Now;
-            userAcitvity.Action = "Thêm nơi điều trị: " + txtPlace.Text;
-            db.User_Activities.InsertOnSubmit(userAcitvity);
-            db.SubmitChanges();
+                        var newAdd = new Address();
+                        newAdd.IDCity = int.Parse(cbxCity.SelectedValue.ToString());
+                        newAdd.IDDistrict = int.Parse(cbxDistrict.SelectedValue.ToString());
+                        newAdd.IDWard = int.Parse(cbxWard.SelectedValue.ToString());
+                        newAdd.Street = txtAddress.Text;
+                        db.Addresses.InsertOnSubmit(newAdd);
+                        db.SubmitChanges();
 
-            showData();
-            MessageBox.Show("Thêm mới nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        newplace.IDAddress = newAdd.IDAddress;
+                        db.Place_Of_Treatments.InsertOnSubmit(newplace);
+                        db.SubmitChanges();
+
+                        var userAcitvity = new User_Activity();
+                        userAcitvity.UserID = FormLogin.user.ID;
+                        userAcitvity.Timestamp = DateTime.Now;
+                        userAcitvity.Action = "Thêm nơi điều trị: " + txtPlace.Text;
+                        db.User_Activities.InsertOnSubmit(userAcitvity);
+                        db.SubmitChanges();
+                        showData();
+                        MessageBox.Show("Thêm thông tin nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    
+                }
+              
+
+
+                
+            }
+            catch {
+                MessageBox.Show("", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             txtPlace.Text = null;
             txtCapacity.Text = null;
@@ -180,19 +217,55 @@ namespace QLBN_COVID
                 MessageBox.Show("Vui lòng chọn trạng thái", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            try
+            {
+                var place = db.Place_Of_Treatments.SingleOrDefault(x => x.ID == int.Parse(r.Cells["ID"].Value.ToString()));
+                var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
+              a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
+              a.Street.Equals(txtAddress.Text));
+                if(add != null)
+                {
+                    MessageBox.Show("Địa chỉ này đã tồn tại", "Ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    place.Name = txtPlace.Text;
+                    place.Capacity = int.Parse(txtCapacity.Text);
+                    place.Current_Quantity = int.Parse(txtCurrentNumber.Text);
 
-            var place = db.Place_Of_Treatments.SingleOrDefault(x => x.ID.Equals(r.Cells["ID"]));
-            place.Name = txtPlace.Text;
-            place.Capacity = int.Parse(txtCapacity.Text);
-            place.Current_Quantity = int.Parse(txtCurrentNumber.Text);
-            var add = db.Addresses.SingleOrDefault(a => a.IDCity == (int.Parse(cbxCity.SelectedValue.ToString())) &&
-           a.IDDistrict == (int.Parse(cbxDistrict.SelectedValue.ToString())) && a.IDWard == (int.Parse(cbxWard.SelectedValue.ToString())) &&
-           a.Street.Equals(txtAddress.Text));
-            place.IDAddress = add.IDAddress;
-            db.SubmitChanges();
+                    var newAdd = new Address();
+                    newAdd.IDCity = int.Parse(cbxCity.SelectedValue.ToString());
+                    newAdd.IDDistrict = int.Parse(cbxDistrict.SelectedValue.ToString());
+                    newAdd.IDWard = int.Parse(cbxWard.SelectedValue.ToString());
+                    newAdd.Street = txtAddress.Text;
+                    db.Addresses.InsertOnSubmit(newAdd);
+                    db.SubmitChanges();
+                    place.IDAddress = newAdd.IDAddress;
+                    db.SubmitChanges();
 
-            showData();
-            MessageBox.Show("Sửa thông tin nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var userAcitvity = new User_Activity();
+                    userAcitvity.UserID = FormLogin.user.ID;
+                    userAcitvity.Timestamp = DateTime.Now;
+                    userAcitvity.Action = "Cập nhật nơi điều trị: " + txtPlace.Text;
+                    db.User_Activities.InsertOnSubmit(userAcitvity);
+                    db.SubmitChanges();
+
+
+                    showData();
+                    MessageBox.Show("Sửa thông tin nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+               
+
+            }
+            catch {
+                MessageBox.Show("", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            //db.SubmitChanges();
+
+            //showData();
+            //MessageBox.Show("Sửa thông tin nơi điều trị thành công", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             txtPlace.Text = null;
             txtCapacity.Text = null;
@@ -221,7 +294,7 @@ namespace QLBN_COVID
             {
                 try
                 {
-                    var place = db.Place_Of_Treatments.SingleOrDefault(x => x.ID.Equals(r.Cells["ID"]));
+                    var place = db.Place_Of_Treatments.SingleOrDefault(x => x.ID == int.Parse(r.Cells["ID"].Value.ToString()));
                     db.Place_Of_Treatments.DeleteOnSubmit(place);
                     db.SubmitChanges();
 
