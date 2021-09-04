@@ -65,6 +65,12 @@ namespace QLBN_COVID
                         f.Show();
                         FormMain.mdiobj.placeOfTreatmentToolStripMenuItem.Enabled = true;
                         FormMain.mdiobj.userToolStripMenuItem.Enabled = true;
+                        var userAcitvity = new User_Activity();
+                        userAcitvity.Action = "Đăng nhập";
+                        userAcitvity.Timestamp = DateTime.Now;
+                        userAcitvity.UserID = tk.ID;
+                        db.User_Activities.InsertOnSubmit(userAcitvity);
+                        db.SubmitChanges();
                     }
                     else
                     {
@@ -72,6 +78,12 @@ namespace QLBN_COVID
                         this.Hide();
                         FormMain f = new FormMain();
                         f.Show();
+                        var userAcitvity = new User_Activity();
+                        userAcitvity.Action = "Đăng nhập";
+                        userAcitvity.Timestamp = DateTime.Now;
+                        userAcitvity.UserID = tk.ID;
+                        db.User_Activities.InsertOnSubmit(userAcitvity);
+                        db.SubmitChanges();
                     }
                 }
                 else if(tk.Status == 2)
